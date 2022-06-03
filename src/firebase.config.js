@@ -1,4 +1,5 @@
-import { getFireStore } from 'firebase/firestore'
+import { initializeApp } from 'firebase/app'
+import { getFirestore } from 'firebase/firestore'
 
 const firebaseConfig = {
   apiKey: "AIzaSyCHr1dcx_zd7IYOGwdnz5KHlf7Fhls9x18",
@@ -7,6 +8,8 @@ const firebaseConfig = {
   storageBucket: "house-marketplace-app-d41d8.appspot.com",
   messagingSenderId: "755365532339",
   appId: "1:755365532339:web:2a55a11a81cd83b4dbd6c6"
-};
+}
 
-export const db = getFireStore()
+
+initializeApp(firebaseConfig)
+export const db = getFirestore()
