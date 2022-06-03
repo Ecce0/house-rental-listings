@@ -17,7 +17,6 @@ const SignUp = () => {
 		email: '',
 		password: '',
 	})
-
 	const { name, email, password } = formData
 	const navigate = useNavigate()
 
@@ -39,6 +38,11 @@ const SignUp = () => {
       updateProfile(auth.currentUser, {
         displayName: name
       })
+
+      const formDataCopy = {...formData}
+      delete formDataCopy.password
+      formDataCopy.timestamp = serverTimestamp()
+      await setDoc(doc(db, 'users', user.uid), formDataCopy)
 
       navigate('/')
 
