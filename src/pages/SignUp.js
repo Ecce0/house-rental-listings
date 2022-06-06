@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { toast } from 'react-toastify'
 import { Link, useNavigate } from 'react-router-dom'
 import { ReactComponent as ArrowRightIcon } from '../assets/svg/keyboardArrowRightIcon.svg'
 import visibilityIcon from '../assets/svg/visibilityIcon.svg'
@@ -48,7 +49,7 @@ const SignUp = () => {
       navigate('/')
 
     } catch (error) {
-      console.log(error)
+      toast.error('Something\'s not right with the registration')
     }
   }
 
