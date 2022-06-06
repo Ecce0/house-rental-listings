@@ -10,6 +10,7 @@ import {
 import { setDoc, doc, serverTimestamp } from 'firebase/firestore'
 import { db } from '../firebase.config'
 
+
 const SignUp = () => {
 	const [showPass, setShowPass] = useState(false)
 	const [formData, setFormData] = useState({
@@ -75,7 +76,7 @@ const SignUp = () => {
 						value={email}
 						onChange={onChange}
 					/>
-					<div>
+					<div className='passwordInputDiv'>
 						<input
 							type={showPass ? 'text' : 'password'}
 							className='passwordInput'

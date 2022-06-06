@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { ReactComponent as ArrowRightIcon } from '../assets/svg/keyboardArrowRightIcon.svg'
 import visibilityIcon from '../assets/svg/visibilityIcon.svg'
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 
 const SignIn = () => {
 	const [showPass, setShowPass] = useState(false)
@@ -20,6 +21,25 @@ const SignIn = () => {
 		}))
 	}
 
+	const onSubmit = async (e) => {
+		e.preventDefault()
+
+		try {
+			const auth = getAuth()
+			const userCredential = await signInWithEmailAndPassword(
+				auth,
+				email,
+				password
+			)
+
+			if (userCredential.user) {
+				navigate('/')
+			}
+		} catch (error) {
+			console.log(error)
+		}
+	}
+
 	return (
 		<>
 			<div className='pageContainer'>
@@ -27,7 +47,7 @@ const SignIn = () => {
 					<p className='pageHeader'>Welcome Back!</p>
 				</header>
 
-				<form>
+				<form onSubmit={onSubmit}>
 					<input
 						type='email'
 						className='emailInput'
@@ -36,7 +56,7 @@ const SignIn = () => {
 						value={email}
 						onChange={onChange}
 					/>
-					<div>
+					<div className='passwordInputDiv'>
 						<input
 							type={showPass ? 'text' : 'password'}
 							className='passwordInput'
@@ -45,12 +65,12 @@ const SignIn = () => {
 							value={password}
 							onChange={onChange}
 						/>
-							<img
-								src={visibilityIcon}
-								alt='show password'
-								className='showPassword'
-								onClick={() => setShowPass((prevState) => !prevState)}
-							/>					
+						<img
+							src={visibilityIcon}
+							alt='show password'
+							className='showPassword'
+							onClick={() => setShowPass((prevState) => !prevState)}
+						/>
 					</div>
 
 					<Link to='/forgot-password' className='forgotPasswordLink'>
