@@ -11,6 +11,7 @@ import {
 } from 'firebase/storage'
 import { db } from '../firebase.config'
 import { v4 as uuidv4 } from 'uuid'
+import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
 
 
 
@@ -165,8 +166,24 @@ const CreateListing = () => {
       toast.error('Images not uploaded')
       return
     })
-    console.log(imgUrls)
+    
+    
+    const formDataCopy = {
+      ...formData,
+      imgUrls,
+      geolocation,
+      timestamp: serverTimestamp()      
+    }
+
+    delete formDataCopy.images
+    delete formDataCopy.address
+    location && (formDataCopy.location = location)
+    !formDataCopy.offer && delete formDataCopy.discountedPrice
+
+    const docRef = await addDoc(collection(db, 'listings'), formDataCopy)
     setLoading(false)
+    toast.success('Listing saved! Goodluck!')
+    navigate(`/category/${formDataCopy.type}/${docRef.id}`)
   }
 
 	const onMutate = (e) => {
