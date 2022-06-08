@@ -7,7 +7,7 @@ import { toast } from 'react-toastify'
 
 
 const CreateListing = () => {
-	const [geolocationEnabled, setGeoLocationEnabled] = useState(true)
+	const [geolocationEnabled, setGeoLocationEnabled] = useState(false)
 	const [loading, setLoading] = useState(false)
 	const [formData, setFormData] = useState({
 		type: 'rent',
@@ -58,38 +58,57 @@ const CreateListing = () => {
 		return () => {
 			isMounted.current = false
 		}
+
+    // eslint-disable-next-line
 	}, [isMounted])
 
 	const onSubmit = async (e) => {
-		e.preventDefault()
+    e.preventDefault()
+
     setLoading(true)
-    if(discountedPrice >=  regularPrice){
+
+    if (discountedPrice >= regularPrice) {
       setLoading(false)
-      toast.error('Discounted Price needs to be less than regular Price')
+      toast.error('Discounted price needs to be less than regular price')
       return
     }
 
-    if(images.length > 6){
+    if (images.length > 6) {
       setLoading(false)
-      toast.error('max 6 images')
+      toast.error('Max 6 images')
       return
     }
 
-    let geoLocation = {}
+    let geolocation = {}
     let location
+    
 
-    if(geolocationEnabled) {
-      setLoading(false)
-      const res = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=AIzaSyCHr1dcx_zd7IYOGwdnz5KHlf7Fhls9x18`)
+    if (geolocationEnabled) {
+      const res = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${process.env.REACT_APP_GEOCODE_API_KEY}`)
 
-      const data = res.json()
+      const data = await res.json()
       console.log(data)
 
+      geolocation.lat = data.results[0]?.geometry.location.lat ?? 0
+      geolocation.lng = data.results[0]?.geometry.location.lng ?? 0
+
+      location =
+        data.status === 'ZERO_RESULTS'
+          ? undefined
+          : data.results[0]?.formatted_address
+
+      if (location === undefined || location.includes('undefined')) {
+        setLoading(false)
+        toast.error('Please enter a correct address')
+        return
+      }
     } else {
-      geoLocation.lat = latitude
-      geoLocation.lng = longitude
+      geolocation.lat = latitude
+      geolocation.lng = longitude
+      location = address
     }
-	}
+    setLoading(false)
+  }
 
 	const onMutate = (e) => {
     let boolean = null
