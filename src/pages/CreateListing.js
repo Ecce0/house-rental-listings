@@ -2,6 +2,9 @@ import React, { useState, useEffect, useRef } from 'react'
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 import { useNavigate } from 'react-router-dom'
 import Spinner from '../components/Spinner'
+import { toast } from 'react-toastify'
+
+
 
 const CreateListing = () => {
 	const [geolocationEnabled, setGeoLocationEnabled] = useState(true)
@@ -57,11 +60,59 @@ const CreateListing = () => {
 		}
 	}, [isMounted])
 
-	const onSubmit = (e) => {
+	const onSubmit = async (e) => {
 		e.preventDefault()
+    setLoading(true)
+    if(discountedPrice >=  regularPrice){
+      setLoading(false)
+      toast.error('Discounted Price needs to be less than regular Price')
+      return
+    }
+
+    if(images.length > 6){
+      setLoading(false)
+      toast.error('max 6 images')
+      return
+    }
+
+    let geoLocation = {}
+    let location
+
+    if(geolocationEnabled) {
+      setLoading(false)
+      const res = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=AIzaSyCHr1dcx_zd7IYOGwdnz5KHlf7Fhls9x18`)
+
+      const data = res.json()
+      console.log(data)
+
+    } else {
+      geoLocation.lat = latitude
+      geoLocation.lng = longitude
+    }
 	}
 
-	const onMutate = (e) => {}
+	const onMutate = (e) => {
+    let boolean = null
+    if(e.target.value === 'true'){
+      boolean = true
+    } 
+    if(e.target.value === 'false'){
+      boolean = false
+    } 
+    if(e.target.files){
+      setFormData((prevState) => ({
+        ...prevState,
+        images: e.target.files
+      }))
+    }
+
+    if(!e.target.files){
+      setFormData((prevState) => ({
+        ...prevState,
+        [e.target.id]: boolean ?? e.target.value
+      }))
+    }
+  }
 
 	if (loading) {
 		return <Spinner />
