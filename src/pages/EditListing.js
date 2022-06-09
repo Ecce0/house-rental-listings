@@ -124,7 +124,7 @@ const EditListing = () => {
     
 
     if (geolocationEnabled) {
-      const res = await fetch(`http://api.positionstack.com/v1/forward?access_key=${process.env.REACT_APP_API_KEY}&query=${address}`)
+      const res = await fetch(`http://api.positionstack.com/v1/forward?access_key=67958ddd78e17c477a9342937de235b0&query=${address}`)
 
       const data = await res.json()
       console.log(data)
