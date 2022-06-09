@@ -4,7 +4,9 @@ import { ReactComponent as EditIcon } from '../assets/svg/editIcon.svg'
 import bedIcon from '../assets/svg/bedIcon.svg'
 import bathtubIcon from '../assets/svg/bathtubIcon.svg'
 
-function ListingItem({ listing, id, onEdit, onDelete }) {
+const ListItem = ({ listing, id, onEdit, onDelete }) => {
+  console.log(listing)
+  
   return (
     <li className='categoryListing'>
       <Link
@@ -61,4 +63,4 @@ function ListingItem({ listing, id, onEdit, onDelete }) {
   )
 }
 
-export default ListingItem
+export default ListItem
