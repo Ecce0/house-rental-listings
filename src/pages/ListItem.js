@@ -4,45 +4,39 @@ import { ReactComponent as DeleteIcon } from '../assets/svg/deleteIcon.svg'
 import bedIcon from '../assets/svg/bedIcon.svg'
 import bathtubIcon from '../assets/svg/bathtubIcon.svg'
 
-const ListItem = ({ listing, id }) => {
-	const { data } = listing
+const ListItem = ({ listing, id, onEdit, onDelete }) => {
 	
-
-  const onDelete = () => {}
-  
-
-
 	return (
 		<li className='categoryListing'>
-			<Link to={`/category/${data.type}/${id}`} className='categoryListingLink'>
+			<Link to={`/category/${listing.type}/${id}`} className='categoryListingLink'>
 				<img
-					src={data.imgUrls[0]}
-					alt={data.name}
+					src={listing.imgUrls[0]}
+					alt={listing.name}
 					className='categoryListingImg'
 				/>
 				<div className='categoryListingDetails'>
-					<p className='categoryListingLoca'>{data.location}</p>
-					<p className='categoryListingName'>{data.name}</p>
+					<p className='categoryListingLoca'>{listing.location}</p>
+					<p className='categoryListingName'>{listing.name}</p>
 					<p className='categoryListingPrice'>
 						$
-						{data.offer
-							? data.discountedPrice
+						{listing.offer
+							? listing.discountedPrice
 									.toString()
 									.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-							: data.regularPrice
+							: listing.regularPrice
 									.toString()
 									.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-						{data.type === 'rent' && ' / Month'}
+						{listing.type === 'rent' && ' / Month'}
 					</p>
 					<div className='categoryListingInfoDiv'>
 						<img src={bedIcon} alt='bed' />
 						<p className='categoryListingInfoText'>
-							{data.bedrooms > 1 ? `${data.bedrooms} Bedrooms` : '1 Bedroom'}
+							{listing.bedrooms > 1 ? `${listing.bedrooms} Bedrooms` : '1 Bedroom'}
 						</p>
 						<img src={bathtubIcon} alt='bathtub' />
 						<p className='categoryListingInfoText'>
-							{data.bathrooms > 1
-								? `${data.bathrooms} Bathrooms`
+							{listing.bathrooms > 1
+								? `${listing.bathrooms} Bathrooms`
 								: '1 Bathroom'}
 						</p>
 					</div>
@@ -52,7 +46,7 @@ const ListItem = ({ listing, id }) => {
 				<DeleteIcon
 					className='removeIcon'
 					fill='rgb(231, 76, 60)'
-					onClick={() => onDelete(data.id, data.name)}
+					onClick={() => onDelete(listing.id, listing.name)}
 				/>
 			)}
 		</li>
