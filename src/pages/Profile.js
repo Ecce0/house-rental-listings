@@ -15,14 +15,14 @@ import { db } from '../firebase.config'
 import { toast } from 'react-toastify'
 import arrowRight from '../assets/svg/keyboardArrowRightIcon.svg'
 import homeIcon from '../assets/svg/homeIcon.svg'
-import ListItem from './ListItem'
+import ListItem from '../components/ListItem'
 
 const Profile = () => {
 	const auth = getAuth()
 	const navigate = useNavigate()
 	const [changeDetails, setChangeDetails] = useState(false)
 	const [loading, setLoading] = useState(true)
-	const [listings, setListings] = useState(null)
+	const [listings, setListings] = useState([])
 	const [formData, setFormData] = useState({
 		name: auth.currentUser.displayName,
 		email: auth.currentUser.email,

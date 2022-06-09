@@ -12,10 +12,10 @@ import {
 import { db } from '../firebase.config'
 import { toast } from 'react-toastify'
 import Spinner from '../components/Spinner'
-import ListItem from './ListItem'
+import ListItem from '../components/ListItem'
 
 const Category = () => {
-	const [listings, setListings] = useState(null)
+	const [listings, setListings] = useState([])
 	const [ lastFetchedListing, setLastFetchListing ] = useState(null)
 	const [loading, setLoading] = useState(true)
 	const params = useParams()
@@ -38,7 +38,6 @@ const Category = () => {
 				const lastVisible = querySnap.docs[querySnap.docs.length-1]
 				setLastFetchListing(lastVisible)
 
-				const listings = []
 				querySnap.forEach((doc) => {
 					return listings.push({
 						id: doc.id,
@@ -53,6 +52,7 @@ const Category = () => {
 		}
 
 		fetchListings()
+		// eslint-disable-next-line
 	}, [params.categoryName])
 
 	const onMoreFetchListings = async () => {
@@ -86,6 +86,8 @@ const Category = () => {
 			}
 		
 	}
+
+
 
 	return (
 		<div className='category'>

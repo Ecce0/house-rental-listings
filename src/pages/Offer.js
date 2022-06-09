@@ -1,24 +1,22 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
 import {
 	collection,
 	getDocs,
 	query,
 	where,
 	orderBy,
-	limit,
-	startAfter,
+	limit
 } from 'firebase/firestore'
 import { db } from '../firebase.config'
 import { toast } from 'react-toastify'
 import Spinner from '../components/Spinner'
-import ListItem from './ListItem'
+import ListItem from '../components/ListItem'
 
 const Offer = () => {
-	const [listings, setListings] = useState(null)
+	const [listings, setListings] = useState([])
 	const [loading, setLoading] = useState(true)
 	const [ lastFetchedListing, setLastFetchListing ] = useState(null)
-	const params = useParams()
+	
 
 	useEffect(() => {
 		const fetchListings = async () => {
@@ -86,6 +84,7 @@ const Offer = () => {
 		}
 	}
 
+
 	return (
 		<div className='category'>
 			<header>
@@ -103,7 +102,7 @@ const Offer = () => {
             {listings.map((listing) => (
               <ListItem 
               key={listing.id}
-              listing={listing}
+              listing={listing.data}
               id={listing.id}>
                 {listing.data}
               </ListItem>

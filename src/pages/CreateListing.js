@@ -16,6 +16,7 @@ import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
 
 
 const CreateListing = () => {
+  // eslint-disable-next-line
 	const [geolocationEnabled, setGeoLocationEnabled] = useState(false)
 	const [loading, setLoading] = useState(false)
 	const [formData, setFormData] = useState({
@@ -96,7 +97,7 @@ const CreateListing = () => {
       const res = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${process.env.REACT_APP_GEOCODE_API_KEY}`)
 
       const data = await res.json()
-      console.log(data)
+    
 
       geolocation.lat = data.results[0]?.geometry.location.lat ?? 0
       geolocation.lng = data.results[0]?.geometry.location.lng ?? 0

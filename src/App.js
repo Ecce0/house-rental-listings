@@ -12,7 +12,7 @@ import SignUp from './pages/SignUp'
 import EditListing from './pages/EditListing'
 import CreateListing from './pages/CreateListing'
 import ForgotPassword from './pages/ForgotPassword'
-import { ToastContainer, toast } from 'react-toastify'
+import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
 function App() {
