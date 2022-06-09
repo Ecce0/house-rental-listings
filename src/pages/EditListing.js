@@ -124,12 +124,14 @@ const EditListing = () => {
     
 
     if (geolocationEnabled) {
-      const res = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${process.env.REACT_APP_GEOCODE_API_KEY}`)
+      const res = await fetch(`http://api.positionstack.com/v1/forward?access_key=${process.env.REACT_APP_API_KEY}&query=${address}`)
 
       const data = await res.json()
+      console.log(data)
       
-      geolocation.lat = data.results[0]?.geometry.location.lat ?? 0
-      geolocation.lng = data.results[0]?.geometry.location.lng ?? 0
+      
+      geolocation.lat = data.results
+      geolocation.lng = data.results
 
       location =
         data.status === 'ZERO_RESULTS'
@@ -195,6 +197,8 @@ const EditListing = () => {
       toast.error('Images not uploaded')
       return
     })
+
+    
     
     
     const formDataCopy = {

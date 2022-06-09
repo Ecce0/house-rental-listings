@@ -43,6 +43,7 @@ const Listing = () => {
 		return <Spinner />
 	}
 
+
 	return (
 		<main>
 			<Helmet>{listing.name}</Helmet>
