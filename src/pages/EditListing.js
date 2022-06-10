@@ -15,7 +15,7 @@ import { getDoc, serverTimestamp, doc, updateDoc } from 'firebase/firestore'
 
 const EditListing = () => {
 	// eslint-disable-next-line
-	const [geolocationEnabled, setGeoLocationEnabled] = useState(false)
+	const [geolocationEnabled, setGeoLocationEnabled] = useState(true)
 	const [loading, setLoading] = useState(false)
 	const [listing, setListing] = useState(false)
 	const [formData, setFormData] = useState({
@@ -121,29 +121,34 @@ const EditListing = () => {
 
 		if (geolocationEnabled) {
 			const res = await fetch(
-				`http://api.positionstack.com/v1/forward?access_key=67958ddd78e17c477a9342937de235b0&query=${address}`
+				`http://api.positionstack.com/v1/forward?access_key=${process.env.REACT_APP_API_KEY}&query=${address}`
 			)
 
 			const data = await res.json()
+				
+			setFormData(
+				(prevState) => ({
+					...prevState,
+					latitude: data.data[0].latitude,
+					longitude: data.data[0].longitude,
+				}),
+				(location = data.data[0].label)
+			)
+			
 			console.log(data)
-
-			listing.latitude = data.results
-			listing.longitude = data.results
-
-			location =
-				data.status === 'ZERO_RESULTS'
-					? undefined
-					: data.results[0]?.formatted_address
-
+		
 			if (location === undefined || location.includes('undefined')) {
 				setLoading(false)
 				toast.error('Please enter a correct address')
 				return
 			}
 		} else {
-			geolocation.lat = latitude
-			geolocation.lng = longitude
+			listing.latitude = latitude
+		  listing.longitude = longitude
 		}
+
+
+		
 
 		const storeImage = async (image) => {
 			return new Promise((resolve, reject) => {
@@ -211,6 +216,7 @@ const EditListing = () => {
 		toast.success('Listing saved! Goodluck!')
 		navigate(`/category/${formDataCopy.type}/${docRef.id}`)
 	}
+
 
 	const onMutate = (e) => {
 		let boolean = null

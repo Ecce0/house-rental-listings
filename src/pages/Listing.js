@@ -43,7 +43,7 @@ const Listing = () => {
 		return <Spinner />
 	}
 
-
+	
 	return (
 		<main>
 			<Helmet>{listing.name}</Helmet>
@@ -120,7 +120,7 @@ const Listing = () => {
 				<div className='leafletContainer'>
 					<MapContainer
 						style={{ height: '100%', width: '100%' }}
-						center={[listing.geolocation.lat, listing.geolocation.lng]}
+						center={[listing.latitude, listing.longitude]}
 						zoom={13}
 						scrollWheelZoom={false}
 					>
@@ -130,7 +130,7 @@ const Listing = () => {
 						/>
 
 						<Marker
-							position={[listing.geolocation.lat, listing.geolocation.lng]}
+							position={[listing.latitude, listing.longitude]}
 						>
 							<Popup>{listing.location}</Popup>
 						</Marker>
