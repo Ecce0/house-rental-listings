@@ -8,23 +8,23 @@ const Explore = () => {
   
   
   return(
-    <div className="explore">
+    <div>
       <header>
-        <p className="pageHeader">
+        <p>
           Explorer
         </p>
       </header>
       <main>
         <Slider />
-        <p className="exploreCategoryHeading">Categories</p>
-        <div className="exploreCategories">
+        <p>Categories</p>
+        <div>
           <Link to='/category/rent'>
-            <img src={rentCategoryImage} alt="rent" className='exploreCategoryImg' />
-            <p className="exploreCategoryName">Places for Rent</p>
+            <img src={rentCategoryImage} alt="rent" />
+            <p >Places for Rent</p>
           </Link>
           <Link to='/category/sale'>
-            <img src={sellCategoryImage} alt="sell" className='exploreCategoryImg' />
-            <p className="exploreCategoryName">Places for Sale</p>
+            <img src={sellCategoryImage} alt="sell" />
+            <p>Places for Sale</p>
           </Link>
         </div>
       </main>

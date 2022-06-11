@@ -96,20 +96,20 @@ const Profile = () => {
 	const onEdit = (listingId) => {
 		navigate(`/edit-listing/${listingId}`)
 	}
-
+{/*figure out line 126 and 135*/}
 	return (
-		<div className='profile'>
-			<header className='profileHeader'>
+		<div>
+			<header>
 				<p className='pageHeader'>My Profile</p>
-				<button type='button' className='logOut' onClick={onLogout}>
+				<button type='button' onClick={onLogout}>
 					Logout
 				</button>
 			</header>
 			<main>
-				<div className='profileDetailsHeader'>
-					<p className='profileDetailsText'>Personal Details</p>
+				<div>
+					<p>Personal Details</p>
 					<p
-						className='changePersonalDetails'
+						
 						onClick={() => {
 							changeDetails && onSubmit()
 							setChangeDetails((prevState) => !prevState)
@@ -118,11 +118,12 @@ const Profile = () => {
 						{changeDetails ? 'done' : 'change'}
 					</p>
 				</div>
-				<div className='profileCard'>
+				<div>
 					<form>
 						<input
 							type='text'
 							id='name'
+							
 							className={!changeDetails ? 'profileName' : 'profileNameActive'}
 							disabled={!changeDetails}
 							value={name}
@@ -131,6 +132,7 @@ const Profile = () => {
 						<input
 							type='text'
 							id='email'
+							
 							className={!changeDetails ? 'profileEmail' : 'profileEmailActive'}
 							disabled={!changeDetails}
 							value={email}
@@ -139,7 +141,7 @@ const Profile = () => {
 					</form>
 				</div>
 
-				<Link to='/create-listing' className='createListing'>
+				<Link to='/create-listing'>
 					<img src={homeIcon} alt='home' />
 					<p>Sale or rent your home!</p>
 					<img src={arrowRight} alt='arrow right' />
@@ -147,8 +149,8 @@ const Profile = () => {
 
 				{!loading && listings?.length > 0 && (
 					<>
-						<p className='listingText'>Your Listings</p>
-						<ul className='listingsList'>
+						<p>Your Listings</p>
+						<ul>
 							{listings.map((listing) => (
 								<ListItem
 									key={listing.id}

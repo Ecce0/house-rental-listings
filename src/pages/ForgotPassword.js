@@ -24,27 +24,27 @@ const ForgotPassword = () => {
 	}
 
 	return (
-		<div className='pageContainer'>
+		<div>
 			<header>
-				<p className='pageHeader'>Forgot Password</p>
+				<p>Forgot Password</p>
 			</header>
 			<main>
 				<form onSubmit={onSubmit}>
 					<input
 						type='email'
 						placeholder='Email'
-						className='emailInput'
+						
 						id='email'
 						value={email}
 						onChange={onChange}
 					/>
-          <Link className='forgotPasswordLink' to='/sign-in'>
+          <Link  to='/sign-in'>
             Sign In
             </Link> 
-            <div className="signInBar">
-              <div className="signInText">
+            <div >
+              <div>
                 Send Reset Link
-                <button className="signInButton">
+                <button >
                   <ArrowRightIcon fill='#ffffff' width='34px' height='34px' />
                 </button>
               </div>

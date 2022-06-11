@@ -116,35 +116,28 @@ const EditListing = () => {
 			return
 		}
 
-		let geolocation = {}
 		let location
+		let data
+		let geolocation = {}
 
 		if (geolocationEnabled) {
 			const res = await fetch(
 				`http://api.positionstack.com/v1/forward?access_key=${process.env.REACT_APP_API_KEY}&query=${address}`
 			)
 
-			const data = await res.json()
+			data = await res.json()
 				
-			setFormData(
-				(prevState) => ({
-					...prevState,
-					latitude: data.data[0].latitude,
-					longitude: data.data[0].longitude,
-				}),
-				(location = data.data[0].label)
-			)
-			
-			console.log(data)
-		
+			location = data.data[0].label
+
+
 			if (location === undefined || location.includes('undefined')) {
 				setLoading(false)
 				toast.error('Please enter a correct address')
 				return
 			}
 		} else {
-			listing.latitude = latitude
-		  listing.longitude = longitude
+			geolocation.lat = data.data[0].latitude
+		  geolocation.lng = data.data[0].longitude
 		}
 
 
@@ -197,14 +190,16 @@ const EditListing = () => {
 			toast.error('Images not uploaded')
 			return
 		})
-
+  
+	
 		const formDataCopy = {
 			...formData,
+			latitude: data.data[0].latitude,
+			longitude: data.data[0].longitude,
 			imgUrls,
-			geolocation,
 			timestamp: serverTimestamp(),
 		}
-
+	
 		formDataCopy.location = address
 		delete formDataCopy.images
 		delete formDataCopy.address
@@ -246,14 +241,14 @@ const EditListing = () => {
 	}
 
 	return (
-		<div className='profile'>
+		<div>
 			<header>
-				<p className='pageHeader'>Edit Listing</p>
+				<p >Edit Listing</p>
 			</header>
 			<main>
 				<form onSubmit={onSubmit}>
-					<label className='formLabel'>Sale/Rent</label>
-					<div className='formButtons'>
+					<label >Sale/Rent</label>
+					<div>
 						<button
 							type='button'
 							className={type === 'sale' ? 'formButtonActive' : 'formButton'}
@@ -274,9 +269,9 @@ const EditListing = () => {
 						</button>
 					</div>
 
-					<label className='formLabel'>Name</label>
+					<label>Name</label>
 					<input
-						className='formInputName'
+						
 						type='text'
 						id='name'
 						value={name}
@@ -286,11 +281,11 @@ const EditListing = () => {
 						required
 					/>
 
-					<div className='formRooms flex'>
+					<div >
 						<div>
-							<label className='formLabel'>Bedrooms</label>
+							<label >Bedrooms</label>
 							<input
-								className='formInputSmall'
+								
 								type='number'
 								id='bedrooms'
 								value={bedrooms}
@@ -301,9 +296,9 @@ const EditListing = () => {
 							/>
 						</div>
 						<div>
-							<label className='formLabel'>Bathrooms</label>
+							<label>Bathrooms</label>
 							<input
-								className='formInputSmall'
+							
 								type='number'
 								id='bathrooms'
 								value={bathrooms}
@@ -315,8 +310,8 @@ const EditListing = () => {
 						</div>
 					</div>
 
-					<label className='formLabel'>Parking spot</label>
-					<div className='formButtons'>
+					<label>Parking spot</label>
+					<div >
 						<button
 							className={parking ? 'formButtonActive' : 'formButton'}
 							type='button'
@@ -341,8 +336,8 @@ const EditListing = () => {
 						</button>
 					</div>
 
-					<label className='formLabel'>Furnished</label>
-					<div className='formButtons'>
+					<label>Furnished</label>
+					<div >
 						<button
 							className={furnished ? 'formButtonActive' : 'formButton'}
 							type='button'
@@ -367,9 +362,9 @@ const EditListing = () => {
 						</button>
 					</div>
 
-					<label className='formLabel'>Address</label>
+					<label>Address</label>
 					<textarea
-						className='formInputAddress'
+						
 						type='text'
 						id='address'
 						value={address}
@@ -378,11 +373,11 @@ const EditListing = () => {
 					/>
 
 					{!geolocationEnabled && (
-						<div className='formLatLng flex'>
+						<div>
 							<div>
-								<label className='formLabel'>Latitude</label>
+								<label>Latitude</label>
 								<input
-									className='formInputSmall'
+									
 									type='number'
 									id='latitude'
 									value={latitude}
@@ -391,9 +386,9 @@ const EditListing = () => {
 								/>
 							</div>
 							<div>
-								<label className='formLabel'>Longitude</label>
+								<label >Longitude</label>
 								<input
-									className='formInputSmall'
+								
 									type='number'
 									id='longitude'
 									value={longitude}
@@ -404,8 +399,8 @@ const EditListing = () => {
 						</div>
 					)}
 
-					<label className='formLabel'>Offer</label>
-					<div className='formButtons'>
+					<label >Offer</label>
+					<div >
 						<button
 							className={offer ? 'formButtonActive' : 'formButton'}
 							type='button'
@@ -428,10 +423,10 @@ const EditListing = () => {
 						</button>
 					</div>
 
-					<label className='formLabel'>Regular Price</label>
-					<div className='formPriceDiv'>
+					<label>Regular Price</label>
+					<div >
 						<input
-							className='formInputSmall'
+							
 							type='number'
 							id='regularPrice'
 							value={regularPrice}
@@ -445,9 +440,9 @@ const EditListing = () => {
 
 					{offer && (
 						<>
-							<label className='formLabel'>Discounted Price</label>
+							<label>Discounted Price</label>
 							<input
-								className='formInputSmall'
+								
 								type='number'
 								id='discountedPrice'
 								value={discountedPrice}
@@ -459,12 +454,12 @@ const EditListing = () => {
 						</>
 					)}
 
-					<label className='formLabel'>Images</label>
-					<p className='imagesInfo'>
+					<label >Images</label>
+					<p >
 						The first image will be the cover (max 6).
 					</p>
 					<input
-						className='formInputFile'
+						
 						type='file'
 						id='images'
 						onChange={onMutate}
@@ -473,7 +468,7 @@ const EditListing = () => {
 						multiple
 						required
 					/>
-					<button type='submit' className='primaryButton createListingButton'>
+					<button type='submit' >
 						Create Listing
 					</button>
 				</form>

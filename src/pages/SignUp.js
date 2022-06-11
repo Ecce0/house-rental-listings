@@ -56,15 +56,15 @@ const SignUp = () => {
 
 	return (
 		<>
-			<div className='pageContainer'>
+			<div>
 				<header>
-					<p className='pageHeader'>Welcome Back!</p>
+					<p>Welcome Back!</p>
 				</header>
 
 				<form onSubmit={onSubmit}>
         <input
 						type='text'
-						className='nameInput'
+						
 						placeholder='Name'
 						id='name'
 						value={name}
@@ -72,16 +72,16 @@ const SignUp = () => {
 					/>
 					<input
 						type='email'
-						className='emailInput'
+						
 						placeholder='Email'
 						id='email'
 						value={email}
 						onChange={onChange}
 					/>
-					<div className='passwordInputDiv'>
+					<div>
 						<input
 							type={showPass ? 'text' : 'password'}
-							className='passwordInput'
+							
 							placeholder='Password'
 							id='password'
 							value={password}
@@ -90,24 +90,24 @@ const SignUp = () => {
 							<img
 								src={visibilityIcon}
 								alt='show password'
-								className='showPassword'
+								
 								onClick={() => setShowPass((prevState) => !prevState)}
 							/>					
 					</div>
 
-					<Link to='/forgot-password' className='forgotPasswordLink'>
+					<Link to='/forgot-password'>
 						Forgot Password
 					</Link>
-					<div className='signUpBar'>
-						<p className='signUpText'>Sign Up</p>
-						<button className='signUpButton'>
+					<div>
+						<p>Sign Up</p>
+						<button >
 							<ArrowRightIcon fill='#fff' width='20px' height='20px' />
 						</button>
 					</div>
 				</form>
 
 			 <OAuth />
-				<Link to='/sign-in' className='registerLink'>
+				<Link to='/sign-in'>
 					Sign In Instead
 				</Link>
 			</div>

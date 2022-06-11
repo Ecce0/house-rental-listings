@@ -44,24 +44,24 @@ const SignIn = () => {
 
 	return (
 		<>
-			<div className='pageContainer'>
+			<div>
 				<header>
-					<p className='pageHeader'>Welcome Back!</p>
+					<p>Welcome Back!</p>
 				</header>
 
 				<form onSubmit={onSubmit}>
 					<input
 						type='email'
-						className='emailInput'
+						
 						placeholder='Email'
 						id='email'
 						value={email}
 						onChange={onChange}
 					/>
-					<div className='passwordInputDiv'>
+					<div>
 						<input
 							type={showPass ? 'text' : 'password'}
-							className='passwordInput'
+							
 							placeholder='Password'
 							id='password'
 							value={password}
@@ -70,17 +70,17 @@ const SignIn = () => {
 						<img
 							src={visibilityIcon}
 							alt='show password'
-							className='showPassword'
+							
 							onClick={() => setShowPass((prevState) => !prevState)}
 						/>
 					</div>
 
-					<Link to='/forgot-password' className='forgotPasswordLink'>
+					<Link to='/forgot-password'>
 						Forgot Password
 					</Link>
-					<div className='signInBar'>
-						<p className='signInText'>Sign In</p>
-						<button className='signInButton'>
+					<div>
+						<p>Sign In</p>
+						<button>
 							<ArrowRightIcon fill='#fff' width='34px' height='34px' />
 						</button>
 					</div>
@@ -88,7 +88,7 @@ const SignIn = () => {
 
 				<OAuth />
 
-				<Link to='/sign-up' className='registerLink'>
+				<Link to='/sign-up'>
 					Sign Up Instead
 				</Link>
 			</div>

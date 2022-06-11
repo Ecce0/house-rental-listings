@@ -95,9 +95,9 @@ function Offers() {
   }
 
   return (
-    <div className='category'>
+    <div>
       <header>
-        <p className='pageHeader'>Offers</p>
+        <p>Offers</p>
       </header>
 
       {loading ? (
@@ -105,7 +105,7 @@ function Offers() {
       ) : listings && listings.length > 0 ? (
         <>
           <main>
-            <ul className='categoryListings'>
+            <ul>
               {listings.map((listing) => (
                 <ListItem
                   listing={listing.data}
@@ -119,7 +119,7 @@ function Offers() {
           <br />
           <br />
           {lastFetchedListing && (
-            <p className='loadMore' onClick={onFetchMoreListings}>
+            <p onClick={onFetchMoreListings}>
               Load More
             </p>
           )}

@@ -83,29 +83,21 @@ const CreateListing = () => {
 
 		if (images.length > 6) {
 			setLoading(false)
-			toast.error('Max 6 images')
+			toast.error('Max amount of images is 6')
 			return
 		}
 
-		let geolocation = {}
+		let data
 		let location
+    let geolocation = {}
 
 		if (geolocationEnabled) {
 			const res = await fetch(
 				`http://api.positionstack.com/v1/forward?access_key=${process.env.REACT_APP_API_KEY}&query=${address}`
 			)
 
-			const data = await res.json()
-			console.log(data)
-
-			setFormData(
-				(prevState) => ({
-					...prevState,
-					latitude: data.data[0].latitude,
-					longitude: data.data[0].longitude,
-				}),
-				(location = data.data[0].label)
-			)
+		  data = await res.json()
+			location = data.data[0].label
 
       
 			if (location === undefined || location.includes('undefined')) {
@@ -114,72 +106,74 @@ const CreateListing = () => {
 				return
 			}
 		} else {
-			geolocation.lat = latitude
-			geolocation.lng = longitude
+			geolocation.lat = data.data[0].latitude
+		  geolocation.lng = data.data[0].longitude
 		}
 
-		const storeImage = async (image) => {
-			return new Promise((resolve, reject) => {
-				const storage = getStorage()
-				const fileName = `${auth.currentUser.uid}-${image.name}-${uuidv4()}`
-
-				const storageRef = ref(storage, 'images/' + fileName)
-
-				const uploadTask = uploadBytesResumable(storageRef, image)
-
-				uploadTask.on(
-					'state_changed',
-					(snapshot) => {
-						const progress =
-							(snapshot.bytesTransferred / snapshot.totalBytes) * 100
-						console.log('Upload is ' + progress + '% done')
-						switch (snapshot.state) {
-							case 'paused':
-								console.log('Upload is paused')
-								break
-							case 'running':
-								console.log('Upload is running')
-								break
-							default:
-								break
-						}
-					},
-					(error) => {
-						reject(error)
-					},
-					() => {
-						// Handle successful uploads on complete
-						// For instance, get the download URL: https://firebasestorage.googleapis.com/...
-						getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-							resolve(downloadURL)
-						})
-					}
-				)
-			})
-		}
-
-		const imgUrls = await Promise.all(
-			[...images].map((image) => storeImage(image))
-		).catch(() => {
-			setLoading(false)
-			toast.error('Images not uploaded')
-			return
-		})
+		  
+       const storeImage = async (image) => {
+        return new Promise((resolve, reject) => {
+          const storage = getStorage()
+          const fileName = `${auth.currentUser.uid}-${image.name}-${uuidv4()}`
+  
+          const storageRef = ref(storage, 'images/' + fileName)
+  
+          const uploadTask = uploadBytesResumable(storageRef, image)
+  
+          uploadTask.on(
+            'state_changed',
+            (snapshot) => {
+              const progress =
+                (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+              console.log('Upload is ' + progress + '% done')
+              switch (snapshot.state) {
+                case 'paused':
+                  console.log('Upload is paused')
+                  break
+                case 'running':
+                  console.log('Upload is running')
+                  break
+                default:
+                  break
+              }
+            },
+            (error) => {
+              reject(error)
+            },
+            () => {
+              // Handle successful uploads on complete
+              // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+              getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                resolve(downloadURL)
+              })
+            }
+          )
+        })
+      }
+  
+      const imgUrls = await Promise.all(
+        [...images].map((image) => storeImage(image))
+      ).catch(() => {
+        setLoading(false)
+        toast.error('Images not uploaded. Please limit to 2Mb or less')
+        return
+      })
 
 		const formDataCopy = {
 			...formData,
+      latitude: data.data[0].latitude,
+      longitude: data.data[0].longitude,
 			imgUrls,
-			geolocation,
 			timestamp: serverTimestamp(),
 		}
-
-		formDataCopy.location = address
+    
+  	formDataCopy.location = address
 		delete formDataCopy.images
 		delete formDataCopy.address
 		!formDataCopy.offer && delete formDataCopy.discountedPrice
 
 		const docRef = await addDoc(collection(db, 'listings'), formDataCopy)
-		setLoading(false)
+    setLoading(false)
 		toast.success('Listing saved! Goodluck!')
 		navigate(`/category/${formDataCopy.type}/${docRef.id}`)
 	}
@@ -211,15 +205,17 @@ const CreateListing = () => {
 		return <Spinner />
 	}
 
+
+	 {/* line 221 230 283 295 309*/}
 	return (
-		<div className='profile'>
+		<div>
 			<header>
-				<p className='pageHeader'>Create a Listing</p>
+				<p>Create a Listing</p>
 			</header>
 			<main>
 				<form onSubmit={onSubmit}>
-					<label className='formLabel'>Sale/Rent</label>
-					<div className='formButtons'>
+					<label>Sale/Rent</label>
+					<div>
 						<button
 							type='button'
 							className={type === 'sale' ? 'formButtonActive' : 'formButton'}
@@ -242,7 +238,7 @@ const CreateListing = () => {
 
 					<label className='formLabel'>Name</label>
 					<input
-						className='formInputName'
+						
 						type='text'
 						id='name'
 						value={name}
@@ -252,11 +248,11 @@ const CreateListing = () => {
 						required
 					/>
 
-					<div className='formRooms flex'>
+					<div>
 						<div>
-							<label className='formLabel'>Bedrooms</label>
+							<label >Bedrooms</label>
 							<input
-								className='formInputSmall'
+								
 								type='number'
 								id='bedrooms'
 								value={bedrooms}
@@ -267,9 +263,9 @@ const CreateListing = () => {
 							/>
 						</div>
 						<div>
-							<label className='formLabel'>Bathrooms</label>
+							<label>Bathrooms</label>
 							<input
-								className='formInputSmall'
+								
 								type='number'
 								id='bathrooms'
 								value={bathrooms}
@@ -281,8 +277,8 @@ const CreateListing = () => {
 						</div>
 					</div>
 
-					<label className='formLabel'>Parking spot</label>
-					<div className='formButtons'>
+					<label>Parking spot</label>
+					<div >
 						<button
 							className={parking ? 'formButtonActive' : 'formButton'}
 							type='button'
@@ -307,8 +303,8 @@ const CreateListing = () => {
 						</button>
 					</div>
 
-					<label className='formLabel'>Furnished</label>
-					<div className='formButtons'>
+					<label >Furnished</label>
+					<div >
 						<button
 							className={furnished ? 'formButtonActive' : 'formButton'}
 							type='button'
@@ -333,9 +329,9 @@ const CreateListing = () => {
 						</button>
 					</div>
 
-					<label className='formLabel'>Address</label>
+					<label>Address</label>
 					<textarea
-						className='formInputAddress'
+						
 						type='text'
 						id='address'
 						value={address}
@@ -344,11 +340,11 @@ const CreateListing = () => {
 					/>
 
 					{!geolocationEnabled && (
-						<div className='formLatLng flex'>
+						<div>
 							<div>
-								<label className='formLabel'>Latitude</label>
+								<label>Latitude</label>
 								<input
-									className='formInputSmall'
+									
 									type='number'
 									id='latitude'
 									value={latitude}
@@ -357,9 +353,9 @@ const CreateListing = () => {
 								/>
 							</div>
 							<div>
-								<label className='formLabel'>Longitude</label>
+								<label>Longitude</label>
 								<input
-									className='formInputSmall'
+									
 									type='number'
 									id='longitude'
 									value={longitude}
@@ -370,8 +366,8 @@ const CreateListing = () => {
 						</div>
 					)}
 
-					<label className='formLabel'>Offer</label>
-					<div className='formButtons'>
+					<label>Offer</label>
+					<div>
 						<button
 							className={offer ? 'formButtonActive' : 'formButton'}
 							type='button'
@@ -394,10 +390,10 @@ const CreateListing = () => {
 						</button>
 					</div>
 
-					<label className='formLabel'>Regular Price</label>
-					<div className='formPriceDiv'>
+					<label >Regular Price</label>
+					<div>
 						<input
-							className='formInputSmall'
+							
 							type='number'
 							id='regularPrice'
 							value={regularPrice}
@@ -411,9 +407,9 @@ const CreateListing = () => {
 
 					{offer && (
 						<>
-							<label className='formLabel'>Discounted Price</label>
+							<label>Discounted Price</label>
 							<input
-								className='formInputSmall'
+								
 								type='number'
 								id='discountedPrice'
 								value={discountedPrice}
@@ -425,12 +421,12 @@ const CreateListing = () => {
 						</>
 					)}
 
-					<label className='formLabel'>Images</label>
-					<p className='imagesInfo'>
+					<label>Images</label>
+					<p>
 						The first image will be the cover (max 6).
 					</p>
 					<input
-						className='formInputFile'
+						
 						type='file'
 						id='images'
 						onChange={onMutate}
@@ -439,7 +435,7 @@ const CreateListing = () => {
 						multiple
 						required
 					/>
-					<button type='submit' className='primaryButton createListingButton'>
+					<button type='submit' >
 						Create Listing
 					</button>
 				</form>

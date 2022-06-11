@@ -98,9 +98,10 @@ function Category() {
   }
 
   return (
-    <div className='category'>
+    <div>
       <header>
-        <p className='pageHeader'>
+        <p>
+         
           {params.categoryName === 'rent'
             ? 'Places for rent'
             : 'Places for sale'}
@@ -112,7 +113,7 @@ function Category() {
       ) : listings && listings.length > 0 ? (
         <>
           <main>
-            <ul className='categoryListings'>
+            <ul>
               {listings.map((listing) => (
                 <ListItem
                   listing={listing.data}
@@ -126,7 +127,7 @@ function Category() {
           <br />
           <br />
           {lastFetchedListing && (
-            <p className='loadMore' onClick={onFetchMoreListings}>
+            <p onClick={onFetchMoreListings}>
               Load More
             </p>
           )}

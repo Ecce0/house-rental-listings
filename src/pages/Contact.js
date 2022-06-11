@@ -32,30 +32,30 @@ const Contact = () => {
   }
 
   return(
-    <div className="pageContainer">
+    <div >
       <header>
-        <p className="pageHeader">
+        <p >
           Contact Landlord
         </p>
       </header>
       {landlord !== null && (
         <main>
-          <div className="contactLandlord">
-            <p className="landlordName">
+          <div>
+            <p>
               Contact {landlord?.name}
             </p>
           </div>
-          <form className="messageForm">
-            <div className="messageDiv">
-              <label htmlFor="message" className="messageLabel">
+          <form >
+            <div >
+              <label htmlFor="message" >
                 Message
               </label>
-              <textarea name="message" id="message" className="textarea" value={message} onChange={onChange}>
+              <textarea name="message" id="message"  value={message} onChange={onChange}>
                 
               </textarea>
 
               <a href={`mailto:${landlord.email}?Subject=${searchParams.get('listingName')}&body=${message}`}>
-                <button type='button' className="primaryButton">Send Message</button>
+                <button type='button' >Send Message</button>
               </a>
             </div>
           </form>
