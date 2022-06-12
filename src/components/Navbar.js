@@ -19,16 +19,16 @@ const Navbar = () => {
 
 	return (
 		<>
-			<footer>
-				<nav className='flex bg-black p-3 items-center place-content-center'>					
-						<ul className='flex flex-row text-purple-700 mx-2px space-x-20'>
+			<footer className="sticky-bottom">
+				<nav className='sm:container flex bg-black p-3 justify-center'>					
+						<ul className='sm:flex flex-row text-purple-700 mx-2px sm:space-x-16 justify-evenly'>
 							<li className=' hover:animate-pulse hover:text-purple-400' onClick={() => navigate('/')}>
 								<GiMagnifyingGlass size={60} color='#64cca2' />
-								<p>Explore</p>
+								<p>Availability</p>
 							</li>
 							<li className=' hover:animate-pulse hover:text-purple-200' onClick={() => navigate('/offers')}>
 								<FaRegHandshake size={60} color='#64cca2' />
-								<p>Offers</p>
+								<p>Deals</p>
 							</li>
 							<li className=' hover:animate-pulse hover:text-purple-200' onClick={() => navigate('/profile')}>
 								<CgProfile size={60} color='#64cca2' />
