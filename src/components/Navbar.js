@@ -19,20 +19,26 @@ const Navbar = () => {
 
 	return (
 		<>
-			<footer className="sticky-bottom">
-				<nav className='sm:container flex bg-black p-3 justify-center'>					
+			<footer className="sticky-bottom justify-content-center align-items-center">
+				<nav className='sm:container flex bg-black p-3 justify-center h-24'>					
 						<ul className='sm:flex flex-row text-purple-700 mx-2px sm:space-x-16 justify-evenly'>
-							<li className=' hover:animate-pulse hover:text-purple-400' onClick={() => navigate('/')}>
-								<GiMagnifyingGlass size={60} color='#64cca2' />
-								<p>Availability</p>
+							<li className=' hover:animate-pulse hover:text-purple-400 flex flex-col items-center' onClick={() => navigate('/')}>
+								<GiMagnifyingGlass 
+								  size={60} 
+									color={pathMatchRoute('/') ? '#160726' : '#64cca2'} />
+								<p className={pathMatchRoute('/') ? '#160726' : '#64cca2'}>Availability</p>
 							</li>
-							<li className=' hover:animate-pulse hover:text-purple-200' onClick={() => navigate('/offers')}>
-								<FaRegHandshake size={60} color='#64cca2' />
-								<p>Deals</p>
+							<li className=' hover:animate-pulse hover:text-purple-400 flex flex-col items-center' onClick={() => navigate('/deals')}>
+								<FaRegHandshake 
+								size={60} 
+								color={pathMatchRoute('/deals') ? '#160726' : '#64cca2'} />
+								<p className={pathMatchRoute('/deals') ? '#160726' : '#64cca2'}>Deals</p>
 							</li>
-							<li className=' hover:animate-pulse hover:text-purple-200' onClick={() => navigate('/profile')}>
-								<CgProfile size={60} color='#64cca2' />
-								<p>Profile</p>
+							<li className=' hover:animate-pulse hover:text-purple-400 flex flex-col items-center' onClick={() => navigate('/profile')}>
+								<CgProfile 
+								size={60} 
+								color={pathMatchRoute('/profile') ? '#160726' : '#64cca2'} />
+								<p className={pathMatchRoute('/profile') ? '#160726' : '#64cca2'}>Profile</p>
 							</li>
 						</ul>
 				</nav>

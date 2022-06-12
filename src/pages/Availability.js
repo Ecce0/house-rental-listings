@@ -4,15 +4,17 @@ import rentCategoryImage from '../assets/jpg/rentCategoryImage.jpg'
 import sellCategoryImage from '../assets/jpg/sellCategoryImage.jpg'
 import Slider from '../components/Slider'
 
-const Explore = () => {
+const Availability
+ = () => {
   
   
   return(
-    <div>
+    <div className="sm:container mx-auto py-3">
       <header>
-        <p>
-          Explorer
-        </p>
+        <h4 className="inline-block">
+          Welcome to E. Collier Real Estate
+        </h4>
+        <p>Specializing in modern and luxury style properties available within Charlotte, NC and beyond</p>
       </header>
       <main>
         <Slider />
@@ -33,4 +35,5 @@ const Explore = () => {
   
 }
 
-export default Explore
+export default Availability
+
