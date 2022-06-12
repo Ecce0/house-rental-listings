@@ -15,9 +15,10 @@ import ForgotPassword from './pages/ForgotPassword'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
+
 function App() {
 	return (
-		<>
+		<div className="sm:container mx-auto px-5 bg-black">
 			<Router>
 				<Routes>
 					<Route path='/' element={<Explore />} />
@@ -37,7 +38,7 @@ function App() {
 				<Navbar />
 			</Router>
 			<ToastContainer />
-		</>
+		</div>
 	)
 }
 
