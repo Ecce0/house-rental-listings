@@ -13,7 +13,7 @@ import { toast } from 'react-toastify'
 import Spinner from '../components/Spinner'
 import ListItem from '../components/ListItem'
 
-function Offers() {
+const Deals = () => {
   const [listings, setListings] = useState(null)
   const [loading, setLoading] = useState(true)
   const [lastFetchedListing, setLastFetchedListing] = useState(null)
@@ -95,9 +95,9 @@ function Offers() {
   }
 
   return (
-    <div>
+    <div className='m-12'>
       <header>
-        <p>Offers</p>
+        <p className='font-medium mb-2 text-5xl text-center'>Deals and Offers</p>
       </header>
 
       {loading ? (
@@ -105,7 +105,7 @@ function Offers() {
       ) : listings && listings.length > 0 ? (
         <>
           <main>
-            <ul>
+            <ul className='p-0'>
               {listings.map((listing) => (
                 <ListItem
                   listing={listing.data}
@@ -119,16 +119,16 @@ function Offers() {
           <br />
           <br />
           {lastFetchedListing && (
-            <p onClick={onFetchMoreListings}>
+            <p className='cursor-pointer w-32 my-0 mx-auto text-center py-1 px-1 bg-black bg-base-300 text-base-content font-semibold rounded-2xl opacity-70 mt-8' onClick={onFetchMoreListings}>
               Load More
             </p>
           )}
         </>
       ) : (
-        <p>There are no current offers</p>
+        <p>There are no current Deals</p>
       )}
     </div>
   )
 }
 
-export default Offers
+export default Deals

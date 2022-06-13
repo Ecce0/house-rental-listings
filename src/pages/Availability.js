@@ -19,11 +19,11 @@ const Availability = () => {
 				<p className="my-12 font-bold text-center text-4xl overline text-violet-500">Categories</p>
 				<div className='flex justify-between'>
 					<Link to='/category/rent' className='flex justify-between w-1/2'>
-						<img src={rentCategoryImage} alt='rent' className='hover:animate-ping min-h-115 h-full rounded-3xl object-cover mx-auto my-0 w-11/12'/>
+						<img src={rentCategoryImage} alt='rent' className='hover:animate-bounce min-h-115 h-full rounded-3xl object-cover mx-auto my-0 w-11/12'/>
 						
 					</Link>
 					<Link to='/category/sale'  className='flex justify-between w-1/2'>
-						<img src={sellCategoryImage} alt='sell' className='hover:animate-ping min-h-115 h-full rounded-3xl object-cover mx-auto my-0 w-11/12'/>
+						<img src={sellCategoryImage} alt='sell' className='hover:animate-bounce min-h-115 h-full rounded-3xl object-cover mx-auto my-0 w-11/12'/>
 						
 					</Link>
           

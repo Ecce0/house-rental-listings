@@ -14,7 +14,7 @@ import { toast } from 'react-toastify'
 import Spinner from '../components/Spinner'
 import ListItem from '../components/ListItem'
 
-function Category() {
+const Category = () => {
   const [listings, setListings] = useState(null)
   const [loading, setLoading] = useState(true)
   const [lastFetchedListing, setLastFetchedListing] = useState(null)
