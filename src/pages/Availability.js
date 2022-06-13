@@ -16,17 +16,23 @@ const Availability = () => {
 			</header>
 			<main>
 				<Carousel />
-				<p>Categories</p>
-				<div>
-					<Link to='/category/rent'>
-						<img src={rentCategoryImage} alt='rent' />
-						<p>Places for Rent</p>
+				<p className="my-12 font-bold text-center text-4xl overline text-violet-500">Categories</p>
+				<div className='flex justify-between'>
+					<Link to='/category/rent' className='flex justify-between w-1/2'>
+						<img src={rentCategoryImage} alt='rent' className='hover:animate-ping min-h-115 h-full rounded-3xl object-cover mx-auto my-0 w-11/12'/>
+						
 					</Link>
-					<Link to='/category/sale'>
-						<img src={sellCategoryImage} alt='sell' />
-						<p>Places for Sale</p>
+					<Link to='/category/sale'  className='flex justify-between w-1/2'>
+						<img src={sellCategoryImage} alt='sell' className='hover:animate-ping min-h-115 h-full rounded-3xl object-cover mx-auto my-0 w-11/12'/>
+						
 					</Link>
+          
+         
 				</div>
+        <div className='flex justify-around text-emerald-500 font-medium'>
+        <p className='text-left font-normal'>Places for Rent</p>
+          <p className='text-left font-normal'>Places for Sale</p>
+          </div>
 			</main>
 		</div>
 	)
