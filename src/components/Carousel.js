@@ -60,7 +60,7 @@ const Carousel = () => {
 						return (
 							<SwiperSlide
 								key={id}
-								onClick={() => navigate(`/category/${data.type}/${id}`)}
+								onClick={() => navigate(`/type/${data.type}/${id}`)}
 							>
 								<div
 									style={{

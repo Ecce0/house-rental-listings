@@ -209,7 +209,7 @@ const EditListing = () => {
 		await updateDoc(docRef, formDataCopy)
 		setLoading(false)
 		toast.success('Listing saved! Goodluck!')
-		navigate(`/category/${formDataCopy.type}/${docRef.id}`)
+		navigate(`/typey/${formDataCopy.type}/${docRef.id}`)
 	}
 
 
