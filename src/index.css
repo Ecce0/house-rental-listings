@@ -24,3 +24,16 @@ body {
 .top-16 {
   top: 5.80rem;
 }
+
+
+.max-w-lg {
+  max-width: 500px;
+}
+
+.userName {
+ all: unset;
+ margin: 0.3rem 0;
+ font-weight: 600;
+ width: 100%;
+}
+

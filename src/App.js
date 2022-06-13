@@ -3,8 +3,8 @@ import Navbar from './components/Navbar'
 import PrivateRoute from './components/PrivateRoute'
 import Availability from './pages/Availability'
 import Deals from './pages/Deals'
-import Category from './pages/Category'
-import Profile from './pages/Profile'
+import Type from './pages/Type'
+import UserProfile from './pages/UserProfile'
 import SignIn from './pages/SignIn'
 import Listing from './pages/Listing'
 import Contact from './pages/Contact'
@@ -23,16 +23,16 @@ function App() {
 				<Routes>
 					<Route path='/' element={<Availability />} />
 					<Route path='/deals' element={<Deals />} />
-					<Route path='/category/:categoryName' element={<Category />} />
+					<Route path='/type/:typeName' element={<Type />} />
 					<Route path='/profile' element={<PrivateRoute />}>
-						<Route path='/profile' element={<Profile />} />
+						<Route path='/profile' element={<UserProfile />} />
 					</Route>
 					<Route path='/sign-in' element={<SignIn />} />
 					<Route path='/sign-up' element={<SignUp />} />
 					<Route path='/forgot-password' element={<ForgotPassword />} />
 					<Route path='/create-listing' element={<CreateListing />} />
 					<Route path='/edit-listing/:listingId' element={<EditListing />} />
-					<Route path='/category/:categoryName/:listingId' element={<Listing />} />
+					<Route path='/type/:typeName/:listingId' element={<Listing />} />
 					<Route path='/contact/:landlordId' element={<Contact />} />
 				</Routes>
 				<Navbar />

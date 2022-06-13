@@ -17,7 +17,7 @@ import arrowRight from '../assets/svg/keyboardArrowRightIcon.svg'
 import homeIcon from '../assets/svg/homeIcon.svg'
 import ListItem from '../components/ListItem'
 
-const Profile = () => {
+const UserProfile = () => {
 	const auth = getAuth()
 	const navigate = useNavigate()
 	const [changeDetails, setChangeDetails] = useState(false)
@@ -96,20 +96,26 @@ const Profile = () => {
 	const onEdit = (listingId) => {
 		navigate(`/edit-listing/${listingId}`)
 	}
-{/*figure out line 126 and 135*/}
+	{
+		/*figure out line 126 and 135*/
+	}
 	return (
-		<div>
-			<header>
-				<p className='pageHeader'>My Profile</p>
-				<button type='button' onClick={onLogout}>
+		<div className='mb-40'>
+			<header className='flex justify-between items-center'>
+				<p className='text-3xl font-extrabold'>My Profile</p>
+				<button
+					className='cursor-pointer text-base bg-base-300 text-base-content font-semibold rounded-2xl py-1 px-3 '
+					type='button'
+					onClick={onLogout}
+				>
 					Logout
 				</button>
 			</header>
 			<main>
-				<div>
-					<p>Personal Details</p>
+				<div className='flex justify-between max-w-lg'>
+					<p className='font-semibold'>Personal Details</p>
 					<p
-						
+						className='cursor-pointer font-semi-bold text-base-content bg-base-300'
 						onClick={() => {
 							changeDetails && onSubmit()
 							setChangeDetails((prevState) => !prevState)
@@ -118,13 +124,12 @@ const Profile = () => {
 						{changeDetails ? 'done' : 'change'}
 					</p>
 				</div>
-				<div>
+				<div className='bg-base-300 rounded-2xl p-4 shadow-2xl max-w-lg'>
 					<form>
 						<input
 							type='text'
 							id='name'
-							
-							className={!changeDetails ? 'profileName' : 'profileNameActive'}
+							className={!changeDetails ? 'userName' : 'userName bg-base-300'}
 							disabled={!changeDetails}
 							value={name}
 							onChange={onChange}
@@ -132,8 +137,7 @@ const Profile = () => {
 						<input
 							type='text'
 							id='email'
-							
-							className={!changeDetails ? 'profileEmail' : 'profileEmailActive'}
+							className={!changeDetails ? 'userName' : 'userName bg-base-300'}
 							disabled={!changeDetails}
 							value={email}
 							onChange={onChange}
@@ -141,7 +145,10 @@ const Profile = () => {
 					</form>
 				</div>
 
-				<Link to='/create-listing'>
+				<Link
+					to='/create-listing'
+					className='bg-base-300 rounded-2xl py-1 px-4 shadow-2xl mt-8 font-semibold max-w-lg flex justify-between items-center'
+				>
 					<img src={homeIcon} alt='home' />
 					<p>Sale or rent your home!</p>
 					<img src={arrowRight} alt='arrow right' />
@@ -149,8 +156,8 @@ const Profile = () => {
 
 				{!loading && listings?.length > 0 && (
 					<>
-						<p>Your Listings</p>
-						<ul>
+						<p className='mt-12 font-semibold'>Your Listings</p>
+						<ul className='p-0'>
 							{listings.map((listing) => (
 								<ListItem
 									key={listing.id}
@@ -168,4 +175,4 @@ const Profile = () => {
 	)
 }
 
-export default Profile
+export default UserProfile

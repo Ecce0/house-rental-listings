@@ -14,7 +14,7 @@ import { toast } from 'react-toastify'
 import Spinner from '../components/Spinner'
 import ListItem from '../components/ListItem'
 
-const Category = () => {
+const Type = () => {
   const [listings, setListings] = useState(null)
   const [loading, setLoading] = useState(true)
   const [lastFetchedListing, setLastFetchedListing] = useState(null)
@@ -30,7 +30,7 @@ const Category = () => {
         // Create a query
         const q = query(
           listingsRef,
-          where('type', '==', params.categoryName),
+          where('type', '==', params.typeName),
           orderBy('timestamp', 'desc'),
           limit(10)
         )
@@ -58,7 +58,7 @@ const Category = () => {
     }
 
     fetchListings()
-  }, [params.categoryName])
+  }, [params.typeName])
 
   // Pagination / Load More
   const onFetchMoreListings = async () => {
@@ -69,7 +69,7 @@ const Category = () => {
       // Create a query
       const q = query(
         listingsRef,
-        where('type', '==', params.categoryName),
+        where('type', '==', params.typeName),
         orderBy('timestamp', 'desc'),
         startAfter(lastFetchedListing),
         limit(10)
@@ -98,13 +98,13 @@ const Category = () => {
   }
 
   return (
-    <div>
+    <div className='m-12'>
       <header>
-        <p>
+        <p className='font-medium mb-2 text-5xl text-center'>
          
-          {params.categoryName === 'rent'
-            ? 'Places for rent'
-            : 'Places for sale'}
+          {params.typeName === 'rent'
+            ? 'Places for Rent'
+            : 'Places for Sale'}
         </p>
       </header>
 
@@ -113,7 +113,7 @@ const Category = () => {
       ) : listings && listings.length > 0 ? (
         <>
           <main>
-            <ul>
+            <ul className='p-0'>
               {listings.map((listing) => (
                 <ListItem
                   listing={listing.data}
@@ -127,16 +127,16 @@ const Category = () => {
           <br />
           <br />
           {lastFetchedListing && (
-            <p onClick={onFetchMoreListings}>
+            <p className='cursor-pointer w-32 my-0 mx-auto text-center py-1 px-1 bg-black bg-base-300 text-base-content font-semibold rounded-2xl opacity-70 mt-8' onClick={onFetchMoreListings}>
               Load More
             </p>
           )}
         </>
       ) : (
-        <p>No listings for {params.categoryName}</p>
+        <p>No listings for {params.typeName}</p>
       )}
     </div>
   )
 }
 
-export default Category
+export default Type

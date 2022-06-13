@@ -119,7 +119,7 @@ const Deals = () => {
           <br />
           <br />
           {lastFetchedListing && (
-            <p className='cursor-pointer w-32 my-0 mx-auto text-center py-1 px-1 bg-black bg-base-300 text-base-content font-semibold rounded-2xl opacity-70 mt-8' onClick={onFetchMoreListings}>
+            <p className='cursor-pointer w-32 my-0 mx-auto text-center py-1 px-1 bg-base-300 text-base-content font-semibold rounded-2xl opacity-70 mt-8' onClick={onFetchMoreListings}>
               Load More
             </p>
           )}
