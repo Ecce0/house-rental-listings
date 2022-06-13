@@ -11,7 +11,7 @@ import Contact from './pages/Contact'
 import SignUp from './pages/SignUp'
 import EditListing from './pages/EditListing'
 import CreateListing from './pages/CreateListing'
-import ForgotPassword from './pages/ForgotPassword'
+import PasswordReminder from './pages/PasswordReminder'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
@@ -29,7 +29,7 @@ function App() {
 					</Route>
 					<Route path='/sign-in' element={<SignIn />} />
 					<Route path='/sign-up' element={<SignUp />} />
-					<Route path='/forgot-password' element={<ForgotPassword />} />
+					<Route path='/password-reminder' element={<PasswordReminder />} />
 					<Route path='/create-listing' element={<CreateListing />} />
 					<Route path='/edit-listing/:listingId' element={<EditListing />} />
 					<Route path='/type/:typeName/:listingId' element={<Listing />} />

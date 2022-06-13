@@ -53,3 +53,7 @@ body {
 .text-3xl {
   font-size: 2rem;
 }
+
+.border-50 {
+  border-radius: 50%
+}

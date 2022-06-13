@@ -16,7 +16,7 @@ const Navbar = () => {
 
 	return (
 		<>
-			<footer className="sticky-bottom justify-content-center align-items-center">
+			<footer className="fixed-bottom justify-content-center align-items-center">
 				<nav className=' flex bg-black p-3 justify-center h-24'>					
 						<ul className='flex flex-row text-purple-700 mx-2px space-x-16 justify-evenly'>
 							<li className=' hover:animate-pulse hover:text-purple-400 flex flex-col items-center' onClick={() => navigate('/')}>
