@@ -11,7 +11,7 @@ import 'swiper/css/scrollbar'
 import 'swiper/css/a11y'
 import Spinner from './Spinner'
 
-const Slider = () => {
+const Carousel = () => {
 	const [loading, setLoading] = useState(true)
 	const [listings, setListings] = useState([])
 
@@ -48,7 +48,7 @@ const Slider = () => {
 	return (
 		listings && (
 			<>
-				<p className='exploreHeading'>Recommonded</p>
+				<p className='font-light mb-2 text-xl text-violet-500'>Recommended</p>
 
 				<Swiper
 					modules={[Navigation, Pagination, Scrollbar, A11y]}
@@ -68,10 +68,10 @@ const Slider = () => {
 										backgroundSize: 'cover',
 										padding: '150px',
 									}}
-									className='swipeSlideDiv'
+									className='h-screen w-full'
 								>
-									<p className='swiperSlideText'>{data.name}</p>
-									<p className='swiperSlidePrice'>
+									<p className='md:text-3xl absolute top-14 left-0 font-semibold max-w-7xl text-xl bg-emerald-200 text-black rounded-2xl'>{data.name}</p>
+									<p className='absolute top-16 left-0 max-w-7xl p-1 px-2 bg-emerald-200 text-black font-bold rounded-2xl'>
 										${data.discountedPrice ?? data.regularPrice}{' '}
 										{data.type === 'rent' && '/month'}
 									</p>
@@ -85,4 +85,4 @@ const Slider = () => {
 	)
 }
 
-export default Slider
+export default Carousel
