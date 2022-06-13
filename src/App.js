@@ -16,6 +16,13 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
 
+//Fix mapcontainer first
+//Then go back and fix styling on all routes
+//Then go back and fix navbar styling - why is it not sitting at bottom, what is the white space on back?
+//Make it all responsive
+
+
+
 function App() {
 	return (
 		<>
