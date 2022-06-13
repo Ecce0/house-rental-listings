@@ -240,241 +240,242 @@ const EditListing = () => {
 		return <Spinner />
 	}
 
-	return (
-		<div>
-			<header>
-				<p >Edit Listing</p>
-			</header>
-			<main>
-				<form onSubmit={onSubmit}>
-					<label >Sale/Rent</label>
-					<div>
-						<button
-							type='button'
-							className={type === 'sale' ? 'formButtonActive' : 'formButton'}
-							id='type'
-							value='sale'
-							onClick={onMutate}
-						>
-							Sale
-						</button>
-						<button
-							type='button'
-							className={type === 'rent' ? 'formButtonActive' : 'formButton'}
-							id='type'
-							value='rent'
-							onClick={onMutate}
-						>
-							Rent
-						</button>
-					</div>
-
-					<label>Name</label>
-					<input
-						
-						type='text'
-						id='name'
-						value={name}
-						onChange={onMutate}
-						maxLength='32'
-						minLength='10'
-						required
-					/>
-
-					<div >
-						<div>
-							<label >Bedrooms</label>
-							<input
-								
-								type='number'
-								id='bedrooms'
-								value={bedrooms}
-								onChange={onMutate}
-								min='1'
-								max='50'
-								required
-							/>
+	
+		return (
+			<div className='mb-40'>
+				<header>
+					<p className='text-3xl font-extrabold'>Edit Listing</p>
+				</header>
+				<main>
+					<form onSubmit={onSubmit}>
+						<label className='font-semibold mt-6 block'>Sale/Rent</label>
+						<div className='flex'>
+							<button
+								type='button'
+								className={type === 'sale' ? 'bg-neutral-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center' : 'formButton'}
+								id='type'
+								value='sale'
+								onClick={onMutate}
+							>
+								Sale
+							</button>
+							<button
+								type='button'
+								className={type === 'rent' ? 'bg-neutral-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center' : 'formButton'}
+								id='type'
+								value='rent'
+								onClick={onMutate}
+							>
+								Rent
+							</button>
 						</div>
-						<div>
-							<label>Bathrooms</label>
-							<input
-							
-								type='number'
-								id='bathrooms'
-								value={bathrooms}
-								onChange={onMutate}
-								min='1'
-								max='50'
-								required
-							/>
-						</div>
-					</div>
-
-					<label>Parking spot</label>
-					<div >
-						<button
-							className={parking ? 'formButtonActive' : 'formButton'}
-							type='button'
-							id='parking'
-							value={true}
-							onClick={onMutate}
-							min='1'
-							max='50'
-						>
-							Yes
-						</button>
-						<button
-							className={
-								!parking && parking !== null ? 'formButtonActive' : 'formButton'
-							}
-							type='button'
-							id='parking'
-							value={false}
-							onClick={onMutate}
-						>
-							No
-						</button>
-					</div>
-
-					<label>Furnished</label>
-					<div >
-						<button
-							className={furnished ? 'formButtonActive' : 'formButton'}
-							type='button'
-							id='furnished'
-							value={true}
-							onClick={onMutate}
-						>
-							Yes
-						</button>
-						<button
-							className={
-								!furnished && furnished !== null
-									? 'formButtonActive'
-									: 'formButton'
-							}
-							type='button'
-							id='furnished'
-							value={false}
-							onClick={onMutate}
-						>
-							No
-						</button>
-					</div>
-
-					<label>Address</label>
-					<textarea
-						
-						type='text'
-						id='address'
-						value={address}
-						onChange={onMutate}
-						required
-					/>
-
-					{!geolocationEnabled && (
-						<div>
-							<div>
-								<label>Latitude</label>
-								<input
-									
-									type='number'
-									id='latitude'
-									value={latitude}
-									onChange={onMutate}
-									required
-								/>
-							</div>
-							<div>
-								<label >Longitude</label>
-								<input
-								
-									type='number'
-									id='longitude'
-									value={longitude}
-									onChange={onMutate}
-									required
-								/>
-							</div>
-						</div>
-					)}
-
-					<label >Discount</label>
-					<div >
-						<button
-							className={discount ? 'formButtonActive' : 'formButton'}
-							type='button'
-							id='discount'
-							value={true}
-							onClick={onMutate}
-						>
-							Yes
-						</button>
-						<button
-							className={
-								!discount && discount !== null ? 'formButtonActive' : 'formButton'
-							}
-							type='button'
-							id='discount'
-							value={false}
-							onClick={onMutate}
-						>
-							No
-						</button>
-					</div>
-
-					<label>Regular Price</label>
-					<div >
+	
+						<label className='font-semibold mt-4 block'>Name</label>
 						<input
-							
-							type='number'
-							id='regularPrice'
-							value={regularPrice}
+							className='bg-neutral-content text-accent py-3.5 px-3 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center border-none outline-none w-4/12 max-w-xs'
+							type='text'
+							id='name'
+							value={name}
 							onChange={onMutate}
-							min='50'
-							max='750000000'
+							maxLength='32'
+							minLength='10'
 							required
 						/>
-						{type === 'rent' && <p className='formPriceText'>$ / Month</p>}
-					</div>
-
-					{discount && (
-						<>
-							<label>Discounted Price</label>
+	
+						<div className='flex '>
+							<div>
+								<label className='font-semibold mt-4 block'>Bedrooms</label>
+								<input
+									className='bg-neutral-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mb-0 ml-0 flex justify-center items-center border-none outline-none mr-12 py-4 px-3'
+									type='number'
+									id='bedrooms'
+									value={bedrooms}
+									onChange={onMutate}
+									min='1'
+									max='50'
+									required
+								/>
+							</div>
+							<div>
+								<label  className='font-semibold mt-4 block'>Bathrooms</label>
+								<input
+									className='bg-neutral-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mb-0 ml-0 flex justify-center items-center border-none outline-none mr-12 py-4 px-3'
+									type='number'
+									id='bathrooms'
+									value={bathrooms}
+									onChange={onMutate}
+									min='1'
+									max='50'
+									required
+								/>
+							</div>
+						</div>
+	
+						<label className='font-semibold mt-4 block'>Parking spot</label>
+						<div className='flex'>
+							<button
+								className={parking ? 'bg-neutral-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center': 'formButton'}
+								type='button'
+								id='parking'
+								value={true}
+								onClick={onMutate}
+								min='1'
+								max='50'
+							>
+								Yes
+							</button>
+							<button
+								className={
+									!parking && parking !== null ? 'bg-neutral-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center' : 'formButton'
+								}
+								type='button'
+								id='parking'
+								value={false}
+								onClick={onMutate}
+							>
+								No
+							</button>
+						</div>
+	
+						<label className='font-semibold mt-4 block'>Furnished</label>
+						<div className='flex'>
+							<button
+								className={furnished ? 'bg-neutral-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center' : 'formButton'}
+								type='button'
+								id='furnished'
+								value={true}
+								onClick={onMutate}
+							>
+								Yes
+							</button>
+							<button
+								className={
+									!furnished && furnished !== null
+										? 'bg-neutral-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center'
+										: 'formButton'
+								}
+								type='button'
+								id='furnished'
+								value={false}
+								onClick={onMutate}
+							>
+								No
+							</button>
+						</div>
+	
+						<label className='font-semibold mt-4 block'>Address</label>
+						<textarea
+							className='bg-neutral-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center border-none outline-none w-4/12 py-3.5 px-3.5'
+							type='text'
+							id='address'
+							value={address}
+							onChange={onMutate}
+							required
+						/>
+	
+						{!geolocationEnabled && (
+							<div className='flex'>
+								<div>
+									<label className='font-semibold mt-4 block'>Latitude</label>
+									<input
+										className='bg-neutral-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mb-0 ml-0 flex justify-center items-center border-none outline-none mr-12 py-4 px-3'
+										type='number'
+										id='latitude'
+										value={latitude}
+										onChange={onMutate}
+										required
+									/>
+								</div>
+								<div>
+									<label className='font-semibold mt-4 block'>Longitude</label>
+									<input
+										className='bg-neutral-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mb-0 ml-0 flex justify-center items-center border-none outline-none mr-12 py-4 px-3'
+										type='number'
+										id='longitude'
+										value={longitude}
+										onChange={onMutate}
+										required
+									/>
+								</div>
+							</div>
+						)} 
+	
+						<label className='font-semibold mt-4 block'>Discount</label>
+						<div className='flex'>
+							<button
+								className={discount ? 'bg-neutral-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center'  : 'formButton'}
+								type='button'
+								id='discount'
+								value={true}
+								onClick={onMutate}
+							>
+								Yes
+							</button>
+							<button
+								className={
+									!discount && discount !== null ? 'bg-neutral-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center' : 'formButton'
+								}
+								type='button'
+								id='discount'
+								value={false}
+								onClick={onMutate}
+							>
+								No
+							</button>
+						</div>
+	
+						<label className='font-semibold mt-4 block'>Regular Price</label>
+						<div>
 							<input
-								
+								className='bg-neutral-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mb-0 ml-0 flex justify-center items-center border-none outline-none mr-12 py-4 px-3'
 								type='number'
-								id='discountedPrice'
-								value={discountedPrice}
+								id='regularPrice'
+								value={regularPrice}
 								onChange={onMutate}
 								min='50'
 								max='750000000'
-								required={discount}
+								required
 							/>
-						</>
-					)}
-
-					<label >Images</label>
-					<p >
-						The first image will be the cover (max 6).
-					</p>
-					<input
-						
-						type='file'
-						id='images'
-						onChange={onMutate}
-						max='6'
-						accept='.jpg,.png,.jpeg'
-						multiple
-						required
-					/>
-					<button type='submit' >
-						Create Listing
-					</button>
-				</form>
-			</main>
-		</div>
-	)
+							{type === 'rent' && <p className='font-semibold rent'>$ / Month</p>}
+						</div>
+	
+						{discount && (
+							<>
+								<label className='font-semibold mt-4 block'>Discounted Price</label>
+								<input
+									className='bg-neutral-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mb-0 ml-0 flex justify-center items-center border-none outline-none mr-12 py-4 px-3'
+									type='number'
+									id='discountedPrice'
+									value={discountedPrice}
+									onChange={onMutate}
+									min='50'
+									max='750000000'
+									required={discount}
+								/>
+							</>
+						)}
+	
+						<label className='font-semibold mt-4 block'>Images</label>
+						<p className='text-base opacity-70'>
+							The first image will be the cover (max 6).
+						</p>
+						<input
+							className='w-full file'
+							type='file'
+							id='images'
+							onChange={onMutate}
+							max='6'
+							accept='.jpg,.png,.jpeg'
+							multiple
+							required
+						/>
+						<button type='submit' className='cursor-pointer rounded-2xl py-3.5 px-8 font-semibold text-xl my-0 mx-auto flex items-center justify-center bg-accent' >
+							Update Listing
+						</button>
+					</form>
+				</main>
+			</div>
+		)
 }
 
 export default EditListing
