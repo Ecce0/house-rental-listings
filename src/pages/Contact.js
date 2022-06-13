@@ -32,30 +32,30 @@ const Contact = () => {
   }
 
   return(
-    <div >
+    <div className='m-4'>
       <header>
-        <p >
+        <p className='font-extrabold text-[2rem]'>
           Contact Landlord
         </p>
       </header>
       {landlord !== null && (
         <main>
-          <div>
-            <p>
+          <div className='mt-8 flex items-center'>
+            <p className='font-semibold text-[1.2rem]'>
               Contact {landlord?.name}
             </p>
           </div>
-          <form >
-            <div >
-              <label htmlFor="message" >
+          <form className='mt-2'>
+            <div className='mt-4 flex flex-col mb-8'>
+              <label htmlFor="message" className='mb-2'>
                 Message
               </label>
-              <textarea name="message" id="message"  value={message} onChange={onChange}>
+              <textarea name="message" id="message"  value={message} onChange={onChange} className='shadow-2xl border-none rounded-[3rem] h-[300px] w-full outline-none py-4 px-6 text-base'>
                 
               </textarea>
 
               <a href={`mailto:${landlord.email}?Subject=${searchParams.get('listingName')}&body=${message}`}>
-                <button type='button' >Send Message</button>
+                <button type='button' className='cursor-pointer rounded-2xl py-3.5 px-8 font-semibold w-[80%] my-0 mx-auto flex items-center justify-center'>Send Message</button>
               </a>
             </div>
           </form>
