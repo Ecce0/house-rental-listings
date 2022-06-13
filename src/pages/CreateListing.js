@@ -25,7 +25,7 @@ const CreateListing = () => {
 		parking: false,
 		furnished: false,
 		address: '',
-		offer: false,
+		discount: false,
 		regularPrice: 0,
 		discountedPrice: 0,
 		images: {},
@@ -41,7 +41,7 @@ const CreateListing = () => {
 		parking,
 		furnished,
 		address,
-		offer,
+		discount,
 		regularPrice,
 		discountedPrice,
 		images,
@@ -170,7 +170,7 @@ const CreateListing = () => {
   	formDataCopy.location = address
 		delete formDataCopy.images
 		delete formDataCopy.address
-		!formDataCopy.offer && delete formDataCopy.discountedPrice
+		!formDataCopy.discount && delete formDataCopy.discountedPrice
 
 		const docRef = await addDoc(collection(db, 'listings'), formDataCopy)
     setLoading(false)
@@ -206,19 +206,19 @@ const CreateListing = () => {
 	}
 
 
-	 {/* line 221 230 283 295 309*/}
+	
 	return (
-		<div>
+		<div className='mb-40'>
 			<header>
-				<p>Create a Listing</p>
+				<p className='text-3xl font-extrabold'>Create a Listing</p>
 			</header>
 			<main>
 				<form onSubmit={onSubmit}>
-					<label>Sale/Rent</label>
-					<div>
+					<label className='font-semibold mt-6 block'>Sale/Rent</label>
+					<div className='flex'>
 						<button
 							type='button'
-							className={type === 'sale' ? 'formButtonActive' : 'formButton'}
+							className={type === 'sale' ? 'bg-neutral-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center' : 'formButton'}
 							id='type'
 							value='sale'
 							onClick={onMutate}
@@ -227,7 +227,7 @@ const CreateListing = () => {
 						</button>
 						<button
 							type='button'
-							className={type === 'rent' ? 'formButtonActive' : 'formButton'}
+							className={type === 'rent' ? 'bg-neutral-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center' : 'formButton'}
 							id='type'
 							value='rent'
 							onClick={onMutate}
@@ -236,9 +236,9 @@ const CreateListing = () => {
 						</button>
 					</div>
 
-					<label className='formLabel'>Name</label>
+					<label className='font-semibold mt-4 block'>Name</label>
 					<input
-						
+						className='bg-neutral-content text-accent py-3.5 px-3 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center border-none outline-none w-4/12 max-w-xs'
 						type='text'
 						id='name'
 						value={name}
@@ -248,11 +248,11 @@ const CreateListing = () => {
 						required
 					/>
 
-					<div>
+					<div className='flex '>
 						<div>
-							<label >Bedrooms</label>
+							<label className='font-semibold mt-4 block'>Bedrooms</label>
 							<input
-								
+								className='bg-neutral-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mb-0 ml-0 flex justify-center items-center border-none outline-none mr-12 py-4 px-3'
 								type='number'
 								id='bedrooms'
 								value={bedrooms}
@@ -263,9 +263,9 @@ const CreateListing = () => {
 							/>
 						</div>
 						<div>
-							<label>Bathrooms</label>
+							<label  className='font-semibold mt-4 block'>Bathrooms</label>
 							<input
-								
+								className='bg-neutral-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mb-0 ml-0 flex justify-center items-center border-none outline-none mr-12 py-4 px-3'
 								type='number'
 								id='bathrooms'
 								value={bathrooms}
@@ -277,10 +277,10 @@ const CreateListing = () => {
 						</div>
 					</div>
 
-					<label>Parking spot</label>
-					<div >
+					<label className='font-semibold mt-4 block'>Parking spot</label>
+					<div className='flex'>
 						<button
-							className={parking ? 'formButtonActive' : 'formButton'}
+							className={parking ? 'bg-neutral-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center': 'formButton'}
 							type='button'
 							id='parking'
 							value={true}
@@ -292,7 +292,7 @@ const CreateListing = () => {
 						</button>
 						<button
 							className={
-								!parking && parking !== null ? 'formButtonActive' : 'formButton'
+								!parking && parking !== null ? 'bg-neutral-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center' : 'formButton'
 							}
 							type='button'
 							id='parking'
@@ -303,10 +303,10 @@ const CreateListing = () => {
 						</button>
 					</div>
 
-					<label >Furnished</label>
-					<div >
+					<label className='font-semibold mt-4 block'>Furnished</label>
+					<div className='flex'>
 						<button
-							className={furnished ? 'formButtonActive' : 'formButton'}
+							className={furnished ? 'bg-neutral-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center' : 'formButton'}
 							type='button'
 							id='furnished'
 							value={true}
@@ -317,7 +317,7 @@ const CreateListing = () => {
 						<button
 							className={
 								!furnished && furnished !== null
-									? 'formButtonActive'
+									? 'bg-neutral-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center'
 									: 'formButton'
 							}
 							type='button'
@@ -329,9 +329,9 @@ const CreateListing = () => {
 						</button>
 					</div>
 
-					<label>Address</label>
+					<label className='font-semibold mt-4 block'>Address</label>
 					<textarea
-						
+						className='bg-neutral-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center border-none outline-none w-4/12 py-3.5 px-3.5'
 						type='text'
 						id='address'
 						value={address}
@@ -340,11 +340,11 @@ const CreateListing = () => {
 					/>
 
 					{!geolocationEnabled && (
-						<div>
+						<div className='flex'>
 							<div>
-								<label>Latitude</label>
+								<label className='font-semibold mt-4 block'>Latitude</label>
 								<input
-									
+									className='bg-neutral-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mb-0 ml-0 flex justify-center items-center border-none outline-none mr-12 py-4 px-3'
 									type='number'
 									id='latitude'
 									value={latitude}
@@ -353,9 +353,9 @@ const CreateListing = () => {
 								/>
 							</div>
 							<div>
-								<label>Longitude</label>
+								<label className='font-semibold mt-4 block'>Longitude</label>
 								<input
-									
+									className='bg-neutral-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mb-0 ml-0 flex justify-center items-center border-none outline-none mr-12 py-4 px-3'
 									type='number'
 									id='longitude'
 									value={longitude}
@@ -364,14 +364,14 @@ const CreateListing = () => {
 								/>
 							</div>
 						</div>
-					)}
+					)} 
 
-					<label>Offer</label>
-					<div>
+					<label className='font-semibold mt-4 block'>Discount</label>
+					<div className='flex'>
 						<button
-							className={offer ? 'formButtonActive' : 'formButton'}
+							className={discount ? 'bg-neutral-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center'  : 'formButton'}
 							type='button'
-							id='offer'
+							id='discount'
 							value={true}
 							onClick={onMutate}
 						>
@@ -379,10 +379,10 @@ const CreateListing = () => {
 						</button>
 						<button
 							className={
-								!offer && offer !== null ? 'formButtonActive' : 'formButton'
+								!discount && discount !== null ? 'bg-neutral-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center' : 'formButton'
 							}
 							type='button'
-							id='offer'
+							id='discount'
 							value={false}
 							onClick={onMutate}
 						>
@@ -390,10 +390,10 @@ const CreateListing = () => {
 						</button>
 					</div>
 
-					<label >Regular Price</label>
+					<label className='font-semibold mt-4 block'>Regular Price</label>
 					<div>
 						<input
-							
+							className='bg-neutral-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mb-0 ml-0 flex justify-center items-center border-none outline-none mr-12 py-4 px-3'
 							type='number'
 							id='regularPrice'
 							value={regularPrice}
@@ -402,31 +402,31 @@ const CreateListing = () => {
 							max='750000000'
 							required
 						/>
-						{type === 'rent' && <p className='formPriceText'>$ / Month</p>}
+						{type === 'rent' && <p className='font-semibold rent'>$ / Month</p>}
 					</div>
 
-					{offer && (
+					{discount && (
 						<>
-							<label>Discounted Price</label>
+							<label className='font-semibold mt-4 block'>Discounted Price</label>
 							<input
-								
+								className='bg-neutral-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mb-0 ml-0 flex justify-center items-center border-none outline-none mr-12 py-4 px-3'
 								type='number'
 								id='discountedPrice'
 								value={discountedPrice}
 								onChange={onMutate}
 								min='50'
 								max='750000000'
-								required={offer}
+								required={discount}
 							/>
 						</>
 					)}
 
-					<label>Images</label>
-					<p>
+					<label className='font-semibold mt-4 block'>Images</label>
+					<p className='text-base opacity-70'>
 						The first image will be the cover (max 6).
 					</p>
 					<input
-						
+						className='w-full file'
 						type='file'
 						id='images'
 						onChange={onMutate}
@@ -435,7 +435,7 @@ const CreateListing = () => {
 						multiple
 						required
 					/>
-					<button type='submit' >
+					<button type='submit' className='cursor-pointer rounded-2xl py-3.5 px-8 font-semibold text-xl my-0 mx-auto flex items-center justify-center bg-accent' >
 						Create Listing
 					</button>
 				</form>

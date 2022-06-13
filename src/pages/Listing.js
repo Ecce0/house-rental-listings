@@ -89,7 +89,7 @@ const Listing = () => {
 			 <div>
         <p>
           {listing.name} - $
-          {listing.offer
+          {listing.discount
             ? listing.discountedPrice
                 .toString()
                 .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
@@ -101,7 +101,7 @@ const Listing = () => {
         <p >
           For {listing.type === 'rent' ? 'Rent' : 'Sale'}
         </p>
-        {listing.offer && (
+        {listing.discount && (
           <p>
             ${listing.regularPrice - listing.discountedPrice} discount
           </p>

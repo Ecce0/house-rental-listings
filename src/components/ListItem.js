@@ -23,7 +23,7 @@ const ListItem = ({ listing, id, onEdit, onDelete }) => {
 
           <p className='categoryListingPrice'>
             $
-            {listing.offer
+            {listing.discount
               ? listing.discountedPrice
                   .toString()
                   .replace(/\B(?=(\d{3})+(?!\d))/g, ',')

@@ -26,7 +26,7 @@ const EditListing = () => {
 		parking: false,
 		furnished: false,
 		address: '',
-		offer: false,
+		discount: false,
 		regularPrice: 0,
 		discountedPrice: 0,
 		images: {},
@@ -42,7 +42,7 @@ const EditListing = () => {
 		parking,
 		furnished,
 		address,
-		offer,
+		discount,
 		regularPrice,
 		discountedPrice,
 		images,
@@ -203,7 +203,7 @@ const EditListing = () => {
 		formDataCopy.location = address
 		delete formDataCopy.images
 		delete formDataCopy.address
-		!formDataCopy.offer && delete formDataCopy.discountedPrice
+		!formDataCopy.discount && delete formDataCopy.discountedPrice
 
 		const docRef = doc(db, 'listings', params.listingId)
 		await updateDoc(docRef, formDataCopy)
@@ -399,12 +399,12 @@ const EditListing = () => {
 						</div>
 					)}
 
-					<label >Offer</label>
+					<label >Discount</label>
 					<div >
 						<button
-							className={offer ? 'formButtonActive' : 'formButton'}
+							className={discount ? 'formButtonActive' : 'formButton'}
 							type='button'
-							id='offer'
+							id='discount'
 							value={true}
 							onClick={onMutate}
 						>
@@ -412,10 +412,10 @@ const EditListing = () => {
 						</button>
 						<button
 							className={
-								!offer && offer !== null ? 'formButtonActive' : 'formButton'
+								!discount && discount !== null ? 'formButtonActive' : 'formButton'
 							}
 							type='button'
-							id='offer'
+							id='discount'
 							value={false}
 							onClick={onMutate}
 						>
@@ -438,7 +438,7 @@ const EditListing = () => {
 						{type === 'rent' && <p className='formPriceText'>$ / Month</p>}
 					</div>
 
-					{offer && (
+					{discount && (
 						<>
 							<label>Discounted Price</label>
 							<input
@@ -449,7 +449,7 @@ const EditListing = () => {
 								onChange={onMutate}
 								min='50'
 								max='750000000'
-								required={offer}
+								required={discount}
 							/>
 						</>
 					)}
