@@ -17,8 +17,8 @@ const Navbar = () => {
 	return (
 		<>
 			<footer className="sticky-bottom justify-content-center align-items-center">
-				<nav className='sm:container flex bg-black p-3 justify-center h-24'>					
-						<ul className='sm:flex flex-row text-purple-700 mx-2px sm:space-x-16 justify-evenly'>
+				<nav className=' flex bg-black p-3 justify-center h-24'>					
+						<ul className='flex flex-row text-purple-700 mx-2px space-x-16 justify-evenly'>
 							<li className=' hover:animate-pulse hover:text-purple-400 flex flex-col items-center' onClick={() => navigate('/')}>
 								<GiMagnifyingGlass 
 								  size={60} 
@@ -31,11 +31,11 @@ const Navbar = () => {
 								color={pathMatchRoute('/deals') ? '#160726' : '#64cca2'} />
 								<p className={pathMatchRoute('/deals') ? '#160726' : '#64cca2'}>Deals</p>
 							</li>
-							<li className=' hover:animate-pulse hover:text-purple-400 flex flex-col items-center' onClick={() => navigate('/profile')}>
+							<li className=' hover:animate-pulse hover:text-purple-400 flex flex-col items-center' onClick={() => navigate('/user-profile')}>
 								<CgProfile 
 								size={60} 
-								color={pathMatchRoute('/profile') ? '#160726' : '#64cca2'} />
-								<p className={pathMatchRoute('/profile') ? '#160726' : '#64cca2'}>Profile</p>
+								color={pathMatchRoute('/user-profile') ? '#160726' : '#64cca2'} />
+								<p className={pathMatchRoute('/user-profile') ? '#160726' : '#64cca2'}>Profile</p>
 							</li>
 						</ul>
 				</nav>

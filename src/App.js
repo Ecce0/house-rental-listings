@@ -18,14 +18,14 @@ import 'react-toastify/dist/ReactToastify.css'
 
 function App() {
 	return (
-		<div className="sm:container mx-auto px-5 bg-black">
+		<>
 			<Router>
 				<Routes>
 					<Route path='/' element={<Availability />} />
 					<Route path='/deals' element={<Deals />} />
 					<Route path='/type/:typeName' element={<Type />} />
-					<Route path='/profile' element={<PrivateRoute />}>
-						<Route path='/profile' element={<UserProfile />} />
+					<Route path='/user-profile' element={<PrivateRoute />}>
+						<Route path='/user-profile' element={<UserProfile />} />
 					</Route>
 					<Route path='/sign-in' element={<SignIn />} />
 					<Route path='/sign-up' element={<SignUp />} />
@@ -38,7 +38,7 @@ function App() {
 				<Navbar />
 			</Router>
 			<ToastContainer />
-		</div>
+		</>
 	)
 }
 
