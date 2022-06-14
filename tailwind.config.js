@@ -14,14 +14,6 @@ module.exports = {
 		prefix: '',
 	},
 	themes: {
-		mytheme: {
-			info: '#8CCAC1',
-
-			success: '#9CB686',
-
-			warning: '#FFD261',
-
-			error: '#FC9783',
-		},
+		
 	},
 }

@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import Home from './components/Home'
 import Navbar from './components/Navbar'
 import PrivateRoute from './components/PrivateRoute'
 import Availability from './pages/Availability'
@@ -28,7 +29,8 @@ function App() {
 		<>
 			<Router>
 				<Routes>
-					<Route path='/' element={<Availability />} />
+					<Route exact path='/' element={<Home />} />					
+					<Route path='/availability' element={<Availability />} />
 					<Route path='/deals' element={<Deals />} />
 					<Route path='/type/:typeName' element={<Type />} />
 					<Route path='/user-profile' element={<PrivateRoute />}>
