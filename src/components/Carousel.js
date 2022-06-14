@@ -48,8 +48,8 @@ const Carousel = () => {
 	return (
 		listings && (
 			<>
-				<p className='font-light mb-2 text-xl text-violet-500'>Recommended</p>
-
+				<p className='font-light mb-2 text-xl text-secondary-content'>Recommended</p>
+				<div className='bg-base-content m-2 rounded-xl p-1 bg-gradient-to-r from-[#a9ccff] via-[#0f1f35] to-[#a9ccff]'>
 				<Swiper
 					modules={[Navigation, Pagination, Scrollbar, A11y]}
 					slidesPerView={1}
@@ -58,6 +58,7 @@ const Carousel = () => {
 				>
 					{listings.map(({ data, id }) => {
 						return (
+							
 							<SwiperSlide
 								key={id}
 								onClick={() => navigate(`/type/${data.type}/${id}`)}
@@ -65,21 +66,23 @@ const Carousel = () => {
 								<div
 									style={{
 										background: `url(${data.imgUrls[0]}) center no-repeat`,
-										backgroundSize: 'cover',
-										padding: '150px',
+										backgroundSize: 'cover'
 									}}
-									className='h-screen w-full'
+									className='rounded-xl h-screen w-full'
 								>
-									<p className='md:text-3xl absolute top-14 left-0 font-semibold max-w-7xl text-xl bg-emerald-200 text-black rounded-2xl'>{data.name}</p>
-									<p className='absolute top-16 left-0 max-w-7xl p-1 px-2 bg-emerald-200 text-black font-bold rounded-2xl'>
+									<p className='md:text-3xl absolute top-14 left-0 font-semibold max-w-7xl text-xl bg-accent text-accent-content rounded-2xl opacity-75'>{data.name}</p>
+									<p className='absolute top-16 left-0 max-w-7xl p-1 px-2 bg-accent text-accent-content rounded-2xl opacity-75 font-bold rounded-2xl'>
 										${data.discountedPrice ?? data.regularPrice}{' '}
 										{data.type === 'rent' && '/month'}
 									</p>
 								</div>
+								
 							</SwiperSlide>
+							
 						)
 					})}
 				</Swiper>
+				</div>
 			</>
 		)
 	)
