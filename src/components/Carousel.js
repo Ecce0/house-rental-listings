@@ -48,7 +48,9 @@ const Carousel = () => {
 	return (
 		listings && (
 			<>
-				<p className='font-light mb-2 text-xl text-secondary-content'>Recommended</p>
+				<div className='flex justify-center'>
+				<p className='font-light mb-2 text-3xl text-secondary-content'>Recommended Properties</p>
+				</div>
 				<div className='bg-base-content m-2 rounded-xl p-1 bg-gradient-to-r from-[#a9ccff] via-[#0f1f35] to-[#a9ccff]'>
 				<Swiper
 					modules={[Navigation, Pagination, Scrollbar, A11y]}
@@ -70,8 +72,8 @@ const Carousel = () => {
 									}}
 									className='rounded-xl h-screen w-full'
 								>
-									<p className='md:text-3xl absolute top-14 left-0 font-semibold max-w-7xl text-xl bg-accent text-accent-content rounded-2xl opacity-75'>{data.name}</p>
-									<p className='absolute top-16 left-0 max-w-7xl p-1 px-2 bg-accent text-accent-content rounded-2xl opacity-75 font-bold rounded-2xl'>
+									<p className='md:text-3xl absolute top-14 left-0 font-semibold max-w-7xl text-xl bg-accent text-accent-content rounded-2xl opacity-75 pl-2 ml-2'>{data.name}</p>
+									<p className='absolute top-16 left-0 max-w-7xl p-1 px-2 bg-accent text-accent-content rounded-2xl opacity-75 font-bold rounded-2xl p-1 ml-2'>
 										${data.discountedPrice ?? data.regularPrice}{' '}
 										{data.type === 'rent' && '/month'}
 									</p>
@@ -83,6 +85,7 @@ const Carousel = () => {
 					})}
 				</Swiper>
 				</div>
+				
 			</>
 		)
 	)

@@ -27,7 +27,7 @@ import 'react-toastify/dist/ReactToastify.css'
 
 function App() {
 	return (
-		<div className='bg-gradient-to-r from-[#3d2636]'>
+		<div className='bg-gradient-to-r from-[#3d2636] font-serif'>
 			<Router>
 				<Routes>
 					<Route exact path='/' element={<Home />} />					
