@@ -32,7 +32,7 @@ const Type = () => {
           listingsRef,
           where('type', '==', params.typeName),
           orderBy('timestamp', 'desc'),
-          limit(10)
+          limit(3)
         )
 
         // Execute query
@@ -60,22 +60,21 @@ const Type = () => {
     fetchListings()
   }, [params.typeName])
 
-  // Pagination / Load More
+
   const onFetchMoreListings = async () => {
     try {
-      // Get reference
+   
       const listingsRef = collection(db, 'listings')
-
-      // Create a query
+      
       const q = query(
         listingsRef,
         where('type', '==', params.typeName),
         orderBy('timestamp', 'desc'),
         startAfter(lastFetchedListing),
-        limit(10)
+        limit(3)
       )
 
-      // Execute query
+      
       const querySnap = await getDocs(q)
 
       const lastVisible = querySnap.docs[querySnap.docs.length - 1]

@@ -29,7 +29,7 @@ const Deals = () => {
           listingsRef,
           where('offer', '==', true),
           orderBy('timestamp', 'desc'),
-          limit(10)
+          limit(3)
         )
 
         // Execute query
@@ -69,7 +69,7 @@ const Deals = () => {
         where('offer', '==', true),
         orderBy('timestamp', 'desc'),
         startAfter(lastFetchedListing),
-        limit(10)
+        limit(3)
       )
 
       // Execute query
@@ -97,7 +97,7 @@ const Deals = () => {
   return (
     <div className='m-12'>
       <header>
-        <p className='font-medium mb-2 text-5xl text-center'>Deals and Offers</p>
+        <p className='font-medium text-5xl text-center my-12'>Deals and Offers</p>
       </header>
 
       {loading ? (
@@ -105,16 +105,21 @@ const Deals = () => {
       ) : listings && listings.length > 0 ? (
         <>
           <main>
-            <ul className='p-0'>
+            <ul className='p-0 flex flex-col'>
               {listings.map((listing) => (
                 <ListItem
                   listing={listing.data}
                   id={listing.id}
                   key={listing.id}
+                  className=''
                 />
               ))}
             </ul>
+
+            
           </main>
+
+
 
           <br />
           <br />
