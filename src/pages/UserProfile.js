@@ -96,11 +96,9 @@ const UserProfile = () => {
 	const onEdit = (listingId) => {
 		navigate(`/edit-listing/${listingId}`)
 	}
-	{
-		/*figure out line 126 and 135*/
-	}
+
 	return (
-		<div className='mb-40'>
+		<div className='mb-40 p-12'>
 			<header className='flex justify-between items-center'>
 				<p className='text-3xl font-extrabold'>My Profile</p>
 				<button
@@ -115,7 +113,7 @@ const UserProfile = () => {
 				<div className='flex justify-between max-w-lg'>
 					<p className='font-semibold'>Personal Details</p>
 					<p
-						className='cursor-pointer font-semi-bold text-base-content bg-base-300'
+						className='cursor-pointer font-semi-bold text-secondary bg-accent-content rounded-xl p-1 mb-2'
 						onClick={() => {
 							changeDetails && onSubmit()
 							setChangeDetails((prevState) => !prevState)
@@ -124,12 +122,12 @@ const UserProfile = () => {
 						{changeDetails ? 'done' : 'change'}
 					</p>
 				</div>
-				<div className='bg-base-300 rounded-2xl p-4 shadow-2xl max-w-lg'>
+				<div className='bg-accent-content rounded-2xl p-4 shadow-2xl max-w-lg text-secondary'>
 					<form>
 						<input
 							type='text'
 							id='name'
-							className={!changeDetails ? 'userName' : 'userName bg-base-300'}
+							className={!changeDetails ? 'userName' : 'userName bg-accent-content'}
 							disabled={!changeDetails}
 							value={name}
 							onChange={onChange}
@@ -137,7 +135,7 @@ const UserProfile = () => {
 						<input
 							type='text'
 							id='email'
-							className={!changeDetails ? 'userName' : 'userName bg-base-300'}
+							className={!changeDetails ? 'userName' : 'userName bg-accent-content'}
 							disabled={!changeDetails}
 							value={email}
 							onChange={onChange}
@@ -147,7 +145,7 @@ const UserProfile = () => {
 
 				<Link
 					to='/create-listing'
-					className='bg-base-300 rounded-2xl py-1 px-4 shadow-2xl mt-8 font-semibold max-w-lg flex justify-between items-center'
+					className='bg-accent-content rounded-2xl py-1 px-4 shadow-2xl mt-8 font-semibold max-w-lg flex justify-between items-center text-secondary'
 				>
 					<img src={homeIcon} alt='home' />
 					<p>Sale or rent your home!</p>
@@ -155,9 +153,9 @@ const UserProfile = () => {
 				</Link>
 
 				{!loading && listings?.length > 0 && (
-					<>
-						<p className='mt-12 font-semibold'>Your Listings</p>
-						<ul className='p-0'>
+					<div className='flex justify-start flex-col mr-[600px]'>
+						<p className='mt-4 font-semibold'>Your Listings</p>
+						<ul className='p-0 flex-col'>
 							{listings.map((listing) => (
 								<ListItem
 									key={listing.id}
@@ -168,7 +166,7 @@ const UserProfile = () => {
 								/>
 							))}
 						</ul>
-					</>
+					</div>
 				)}
 			</main>
 		</div>
