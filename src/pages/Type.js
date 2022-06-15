@@ -112,7 +112,7 @@ const Type = () => {
       ) : listings && listings.length > 0 ? (
         <>
           <main>
-            <ul className='p-0'>
+            <ul className='p-0 flex flex-col'>
               {listings.map((listing) => (
                 <ListItem
                   listing={listing.data}

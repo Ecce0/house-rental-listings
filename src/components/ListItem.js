@@ -13,10 +13,10 @@ const ListItem = ({ listing, id, onEdit, onDelete }) => {
 				 <div className='h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden'
         style={{ backgroundImage: `url(${listing.imgUrls[0]})`, width: 'max-w-full', height: 'max-h-full' }}>          
         </div>
-				<div className='border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 justify-between leading-normal'>
+				<div className='border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 justify-between leading-normal max-w-md min-w-0'>
 					<div className='mb-8'>
 						<div className='text-gray-900 font-bold text-xl mb-2'>
-							<p>{listing.location}</p>
+							<p className='flex flex-wrap'>{listing.location}</p>
 							<p className='italic text-neutral-content text-base'>{listing.name}</p>
 						</div>
 						<p className='text-secondary text-base'>
