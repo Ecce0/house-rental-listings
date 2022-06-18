@@ -42,7 +42,7 @@ const Listing = () => {
 		return <Spinner />
 	}
 
-	//check line 60
+	
 	return (
 		<main>
 			<h3 className='text-3xl font-extrabold py-2 px-2'>{listing.name}</h3>

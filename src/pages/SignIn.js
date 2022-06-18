@@ -46,49 +46,89 @@ const SignIn = () => {
 		<>
 			<div className='m-4'>
 				<header>
-					<p className='text-3xl font-extrabold'>Welcome Back!</p>
+					<p className='text-3xl font-extrabold mb-4'>Welcome!</p>
 				</header>
 
-				<form onSubmit={onSubmit}>
-					<input
-						type='email'
-						className='mb-8 email' 
-						placeholder='Email'
-						id='email'
-						value={email}
-						onChange={onChange}
-					/>
-					<div className='relative'>
-						<input
-							type={showPass ? 'text' : 'password'}
-							className='mb-8 password'
-							placeholder='Password'
-							id='password'
-							value={password}
-							onChange={onChange}
-						/>
-						<img
-							src={visibilityIcon}
-							alt='show password'
-							className='cursor-pointer absolute p-4 showPassword'
-							onClick={() => setShowPass((prevState) => !prevState)}
-						/>
+				<form onSubmit={onSubmit} className='w-full max-w-xs'>
+					<div className='md:flex md:items-center mb-6'>
+						<div className='md:w-1/3'>
+							<label
+								className='block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4'
+								for='inline-email'
+							>
+								Email
+							</label>
+						</div>
+						<div className='md:w-2/3'>
+							<input
+								type='email'
+								className='bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-1 px-1 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500 h-8'
+								placeholder='Email'
+								id='email'
+								value={email}
+								onChange={onChange}
+							/>
+						</div>
 					</div>
 
-					<Link to='/forgot-password' className='cursor-pointer text-accent font-semibold text-right'>
-						Forgot Password
-					</Link>
-					<div className='flex justify-between inherit items-center mt-12'>
-						<p className='cursor-pointer font-bold text-2xl'>Sign In</p>
-						<button>
-							<ArrowRightIcon fill='#fff' width='34px' height='34px' />
-						</button>
+					<div className='md:flex md:items-center mb-6'>
+						<div className='md:w-1/3'>
+							<label
+								className='block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4'
+								for='inline-password'
+							>
+								Password
+							</label>
+						</div>
+						<div className='w-2/3 relative'>
+							<input
+								type={showPass ? 'text' : 'password'}
+								placeholder='Password'
+								className='bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-1 px-1 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500 h-8'
+								id='password'
+								value={password}
+								onChange={onChange}
+							/>
+							<img
+								src={visibilityIcon}
+								alt='show password'
+								className='cursor-pointer absolute h-4 w-4 right-[0.1px] bottom-[16px]'
+								onClick={() => setShowPass((prevState) => !prevState)}
+							/>
+						</div>
+					</div>
+
+					<div className='md:flex md:items-center'>
+						<div className='md:w-1/3'></div>
+						<div className='md:w-2/3'>
+							<button
+								className='shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded'
+								type='button'
+							>
+								Sign In
+							</button>
+							<div className='flex flex-row justify-between'>
+								<Link
+									to='/forgot-password'
+									className='cursor-pointer text-accent-content font-semibold text-right '
+								>
+									Forgot Password
+								</Link>
+
+								<button>
+									<ArrowRightIcon fill='#fff' width='34px' height='34px' />
+								</button>
+							</div>
+						</div>
 					</div>
 				</form>
 
 				<OAuth />
 
-				<Link to='/sign-up' className='mt-16 text-accent font-semibold text-center mb-12'>
+				<Link
+					to='/sign-up'
+					className='flex justify-center mt-16 text-white font-semibold text-center mb-12'
+				>
 					Sign Up Instead
 				</Link>
 			</div>

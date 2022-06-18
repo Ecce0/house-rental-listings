@@ -36,10 +36,10 @@ const OAuth = () => {
   }
 
   return(
-    <div className="socialLogin">
+    <div className="flex flex-col mt-16 items-center content-center">
       <p>Sign {location.pathname === '/sign-up' ? 'up' : 'in'} with</p>
-      <button className="socialIconDiv" onClick={onGoogleClick}>
-        <img className="socialIconImg" src={googleIcon} alt="google" />
+      <button className="mt-4" onClick={onGoogleClick}>
+        <img className="mb-4" src={googleIcon} alt="google" />
       </button>
     </div>
 

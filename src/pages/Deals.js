@@ -105,7 +105,7 @@ const Deals = () => {
       ) : listings && listings.length > 0 ? (
         <>
           <main>
-            <ul className='p-0 flex flex-col'>
+            <ul className='p-0 flex flex-col mr-[610px]'>
               {listings.map((listing) => (
                 <ListItem
                   listing={listing.data}
