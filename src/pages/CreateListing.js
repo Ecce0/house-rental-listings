@@ -25,7 +25,7 @@ const CreateListing = () => {
 		parking: false,
 		furnished: false,
 		address: '',
-		discount: false,
+		offer: false,
 		regularPrice: 0,
 		discountedPrice: 0,
 		images: {},
@@ -41,7 +41,7 @@ const CreateListing = () => {
 		parking,
 		furnished,
 		address,
-		discount,
+		offer,
 		regularPrice,
 		discountedPrice,
 		images,
@@ -89,17 +89,16 @@ const CreateListing = () => {
 
 		let data
 		let location
-    let geolocation = {}
+		let geolocation = {}
 
 		if (geolocationEnabled) {
 			const res = await fetch(
 				`http://api.positionstack.com/v1/forward?access_key=${process.env.REACT_APP_API_KEY}&query=${address}`
 			)
 
-		  data = await res.json()
+			data = await res.json()
 			location = data.data[0].label
 
-      
 			if (location === undefined || location.includes('undefined')) {
 				setLoading(false)
 				toast.error('Please enter a correct address')
@@ -107,73 +106,72 @@ const CreateListing = () => {
 			}
 		} else {
 			geolocation.lat = data.data[0].latitude
-		  geolocation.lng = data.data[0].longitude
+			geolocation.lng = data.data[0].longitude
 		}
 
-		  
-       const storeImage = async (image) => {
-        return new Promise((resolve, reject) => {
-          const storage = getStorage()
-          const fileName = `${auth.currentUser.uid}-${image.name}-${uuidv4()}`
-  
-          const storageRef = ref(storage, 'images/' + fileName)
-  
-          const uploadTask = uploadBytesResumable(storageRef, image)
-  
-          uploadTask.on(
-            'state_changed',
-            (snapshot) => {
-              const progress =
-                (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-              console.log('Upload is ' + progress + '% done')
-              switch (snapshot.state) {
-                case 'paused':
-                  console.log('Upload is paused')
-                  break
-                case 'running':
-                  console.log('Upload is running')
-                  break
-                default:
-                  break
-              }
-            },
-            (error) => {
-              reject(error)
-            },
-            () => {
-              // Handle successful uploads on complete
-              // For instance, get the download URL: https://firebasestorage.googleapis.com/...
-              getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-                resolve(downloadURL)
-              })
-            }
-          )
-        })
-      }
-  
-      const imgUrls = await Promise.all(
-        [...images].map((image) => storeImage(image))
-      ).catch(() => {
-        setLoading(false)
-        toast.error('Images not uploaded. Please limit to 2Mb or less')
-        return
-      })
+		const storeImage = async (image) => {
+			return new Promise((resolve, reject) => {
+				const storage = getStorage()
+				const fileName = `${auth.currentUser.uid}-${image.name}-${uuidv4()}`
+
+				const storageRef = ref(storage, 'images/' + fileName)
+
+				const uploadTask = uploadBytesResumable(storageRef, image)
+
+				uploadTask.on(
+					'state_changed',
+					(snapshot) => {
+						const progress =
+							(snapshot.bytesTransferred / snapshot.totalBytes) * 100
+						console.log('Upload is ' + progress + '% done')
+						switch (snapshot.state) {
+							case 'paused':
+								console.log('Upload is paused')
+								break
+							case 'running':
+								console.log('Upload is running')
+								break
+							default:
+								break
+						}
+					},
+					(error) => {
+						reject(error)
+					},
+					() => {
+						// Handle successful uploads on complete
+						// For instance, get the download URL: https://firebasestorage.googleapis.com/...
+						getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+							resolve(downloadURL)
+						})
+					}
+				)
+			})
+		}
+
+		const imgUrls = await Promise.all(
+			[...images].map((image) => storeImage(image))
+		).catch(() => {
+			setLoading(false)
+			toast.error('Images not uploaded. Please limit to 2Mb or less')
+			return
+		})
 
 		const formDataCopy = {
 			...formData,
-      latitude: data.data[0].latitude,
-      longitude: data.data[0].longitude,
+			latitude: data.data[0].latitude,
+			longitude: data.data[0].longitude,
 			imgUrls,
 			timestamp: serverTimestamp(),
 		}
-    
-  	formDataCopy.location = address
+
+		formDataCopy.location = address
 		delete formDataCopy.images
 		delete formDataCopy.address
-		!formDataCopy.discount && delete formDataCopy.discountedPrice
+		!formDataCopy.offer && delete formDataCopy.discountedPrice
 
 		const docRef = await addDoc(collection(db, 'listings'), formDataCopy)
-    setLoading(false)
+		setLoading(false)
 		toast.success('Listing saved! Goodluck!')
 		navigate(`/type/${formDataCopy.type}/${docRef.id}`)
 	}
@@ -205,54 +203,78 @@ const CreateListing = () => {
 		return <Spinner />
 	}
 
-
-	
 	return (
 		<div className='mb-40'>
 			<header>
-				<p className='text-3xl font-extrabold'>Create a Listing</p>
+				<p className='text-3xl font-extrabold mt-[15px] ml-8'>
+					Create a Listing
+				</p>
 			</header>
-			<main>
-				<form onSubmit={onSubmit}>
-					<label className='font-semibold mt-6 block'>Sale/Rent</label>
-					<div className='flex'>
-						<button
-							type='button'
-							className={type === 'sale' ? 'bg-neutral-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center' : 'formButton'}
-							id='type'
-							value='sale'
-							onClick={onMutate}
-						>
-							Sale
-						</button>
-						<button
-							type='button'
-							className={type === 'rent' ? 'bg-neutral-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center' : 'formButton'}
-							id='type'
-							value='rent'
-							onClick={onMutate}
-						>
-							Rent
-						</button>
-					</div>
 
-					<label className='font-semibold mt-4 block'>Name</label>
-					<input
-						className='bg-neutral-content text-accent py-3.5 px-3 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center border-none outline-none w-4/12 max-w-xs'
-						type='text'
-						id='name'
-						value={name}
-						onChange={onMutate}
-						maxLength='32'
-						minLength='10'
-						required
-					/>
+			<div className='flex flex-col justify-center'>
+				<form onSubmit={onSubmit} className='w-full max-w-xl my-8'>
+					<div className='flex flex-wrap mx-3 mb-6'>
+						<div className='w-full md:w-1/2 px-3 mb-6 md:mb-0'>
+							<label
+								className='block uppercase tracking-wide text-accent-content text-xs font-bold mb-2'
+								
+							>
+								Sale/Rent
+							</label>
+							<div className='flex mb-8'>
+								<button
+									type='button'
+									className={
+										type === 'sale'
+											? 'bg-gradient-to-r from-accent-focus to-secondary-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center'
+											: 'bg-gradient-to-r from-base to-accent-focus text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center'
+									}
+									id='type'
+									value='sale'
+									onClick={onMutate}
+								>
+									Sale
+								</button>
+								<button
+									type='button'
+									className={
+										type === 'rent'
+											? 'bg-gradient-to-r from-accent-focus to-secondary-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center'
+											: 'bg-gradient-to-r from-base-300 to-accent-focus text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center'
+									}
+									id='type'
+									value='rent'
+									onClick={onMutate}
+								>
+									Rent
+								</button>
+							</div>
+							<label
+								className='block uppercase tracking-wide text-accent-content text-xs font-bold mb-2'
+							
+							>
+								Name
+							</label>
 
-					<div className='flex '>
-						<div>
-							<label className='font-semibold mt-4 block'>Bedrooms</label>
 							<input
-								className='bg-neutral-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mb-0 ml-0 flex justify-center items-center border-none outline-none mr-12 py-4 px-3'
+								className='appearance-none block w-full bg-gray-200 text-base-300 border border-base-100 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
+								type='text'
+								id='name'
+								value={name}
+								onChange={onMutate}
+								maxLength='32'
+								minLength='10'
+								required
+							/>
+
+							<label
+								className='block uppercase tracking-wide text-accent-content text-xs font-bold mb-2'
+							
+							>
+								Bedrooms
+							</label>
+							<input
+								className='appearance-none block w-7 bg-gray-200 text-base-300 border border-base-100 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
 								type='number'
 								id='bedrooms'
 								value={bedrooms}
@@ -261,11 +283,14 @@ const CreateListing = () => {
 								max='50'
 								required
 							/>
-						</div>
-						<div>
-							<label  className='font-semibold mt-4 block'>Bathrooms</label>
+							<label
+								className='block uppercase tracking-wide text-accent-content text-xs font-bold mb-2'
+							
+							>
+								Bathrooms
+							</label>
 							<input
-								className='bg-neutral-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mb-0 ml-0 flex justify-center items-center border-none outline-none mr-12 py-4 px-3'
+								className='appearance-none block w-7 bg-gray-200 text-base-300 border border-base-100 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
 								type='number'
 								id='bathrooms'
 								value={bathrooms}
@@ -274,172 +299,245 @@ const CreateListing = () => {
 								max='50'
 								required
 							/>
+
+							<label
+								className='block uppercase tracking-wide text-accent-content text-xs font-bold mb-2'
+								
+							>
+								Parking Spot and/or Space
+							</label>
+							<div className='flex mb-4'>
+								<button
+									className={
+										parking
+											? 'bg-gradient-to-r from-accent-focus to-secondary-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center'
+											: 'bg-gradient-to-r from-base to-accent-focus text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center'
+									}
+									type='button'
+									id='parking'
+									value={true}
+									onClick={onMutate}
+									min='1'
+									max='50'
+								>
+									Yes
+								</button>
+								<button
+									className={
+										!parking && parking !== null
+											? 'bg-gradient-to-r from-accent-focus to-secondary-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center'
+											: 'bg-gradient-to-r from-base to-accent-focus text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center'
+									}
+									type='button'
+									id='parking'
+									value={false}
+									onClick={onMutate}
+								>
+									No
+								</button>
+							</div>
+							<label
+								className='block uppercase tracking-wide text-accent-content text-xs font-bold mb-2'
+								
+							>
+								Furnished?
+							</label>
+
+							<div className='flex mb-4'>
+								<button
+									className={
+										furnished
+											? 'bg-gradient-to-r from-accent-focus to-secondary-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center'
+											: 'bg-gradient-to-r from-base to-accent-focus text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center'
+									}
+									type='button'
+									id='furnished'
+									value={true}
+									onClick={onMutate}
+								>
+									Yes
+								</button>
+								<button
+									className={
+										!furnished && furnished !== null
+											? 'bg-gradient-to-r from-accent-focus to-secondary-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center'
+											: 'bg-gradient-to-r from-base to-accent-focus text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center'
+									}
+									type='button'
+									id='furnished'
+									value={false}
+									onClick={onMutate}
+								>
+									No
+								</button>
+							</div>
+							<div className='flex flex-col mb-4'>
+							<label
+								className='block uppercase tracking-wide text-accent-content text-xs font-bold mb-2'
+					
+							>
+								Address
+							</label>
+							<textarea
+								className='bg-white text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center border border-base-100 outline-none w-full py-3.5 px-3.5'
+								type='text'
+								id='address'
+								value={address}
+								onChange={onMutate}
+								required
+							/>
+							</div>
+
+							{!geolocationEnabled && (
+								<div>
+									<label
+										className='block uppercase tracking-wide text-accent-content text-xs font-bold mb-2'
+										
+									>
+										Latitude
+									</label>
+									<input
+										className='appearance-none block w-full bg-gray-200 text-accent-content border border-base-100 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
+										type='number'
+										id='latitude'
+										value={latitude}
+										onChange={onMutate}
+										required
+									/>
+									<label
+										className='block uppercase tracking-wide text-accent-content text-xs font-bold mb-2'
+									
+									>
+										Longitude
+									</label>
+									<input
+										className='appearance-none block w-full bg-gray-200 text-accent-content border border-base-100 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
+										type='number'
+										id='longitude'
+										value={longitude}
+										onChange={onMutate}
+										required
+									/>
+								</div>
+							)}
 						</div>
-					</div>
-
-					<label className='font-semibold mt-4 block'>Parking spot</label>
-					<div className='flex'>
-						<button
-							className={parking ? 'bg-neutral-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center': 'formButton'}
-							type='button'
-							id='parking'
-							value={true}
-							onClick={onMutate}
-							min='1'
-							max='50'
+						<div className='flex flex-col mb-4'>
+						<label
+							className='block uppercase tracking-wide text-accent-content text-xs font-bold mb-2'
+				
 						>
-							Yes
-						</button>
-						<button
-							className={
-								!parking && parking !== null ? 'bg-neutral-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center' : 'formButton'
-							}
-							type='button'
-							id='parking'
-							value={false}
-							onClick={onMutate}
-						>
-							No
-						</button>
-					</div>
-
-					<label className='font-semibold mt-4 block'>Furnished</label>
-					<div className='flex'>
-						<button
-							className={furnished ? 'bg-neutral-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center' : 'formButton'}
-							type='button'
-							id='furnished'
-							value={true}
-							onClick={onMutate}
-						>
-							Yes
-						</button>
-						<button
-							className={
-								!furnished && furnished !== null
-									? 'bg-neutral-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center'
-									: 'formButton'
-							}
-							type='button'
-							id='furnished'
-							value={false}
-							onClick={onMutate}
-						>
-							No
-						</button>
-					</div>
-
-					<label className='font-semibold mt-4 block'>Address</label>
-					<textarea
-						className='bg-neutral-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center border-none outline-none w-4/12 py-3.5 px-3.5'
-						type='text'
-						id='address'
-						value={address}
-						onChange={onMutate}
-						required
-					/>
-
-					{!geolocationEnabled && (
+							Discount
+						</label>
 						<div className='flex'>
-							<div>
-								<label className='font-semibold mt-4 block'>Latitude</label>
-								<input
-									className='bg-neutral-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mb-0 ml-0 flex justify-center items-center border-none outline-none mr-12 py-4 px-3'
-									type='number'
-									id='latitude'
-									value={latitude}
-									onChange={onMutate}
-									required
-								/>
-							</div>
-							<div>
-								<label className='font-semibold mt-4 block'>Longitude</label>
-								<input
-									className='bg-neutral-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mb-0 ml-0 flex justify-center items-center border-none outline-none mr-12 py-4 px-3'
-									type='number'
-									id='longitude'
-									value={longitude}
-									onChange={onMutate}
-									required
-								/>
-							</div>
+							<button
+								className={
+									offer
+										? 'bg-gradient-to-r from-accent-focus to-secondary-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center'
+										: 'bg-gradient-to-r from-base to-accent-focus text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center'
+								}
+								type='button'
+								id='offer'
+								value={true}
+								onClick={onMutate}
+							>
+								Yes
+							</button>
+							<button
+								className={
+									!offer && offer !== null
+										? 'bg-gradient-to-r from-accent-focus to-secondary-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center'
+										: 'bg-gradient-to-r from-base to-accent-focus text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center'
+								}
+								type='button'
+								id='offer'
+								value={false}
+								onClick={onMutate}
+							>
+								No
+							</button>
 						</div>
-					)} 
+						
 
-					<label className='font-semibold mt-4 block'>Discount</label>
-					<div className='flex'>
-						<button
-							className={discount ? 'bg-neutral-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center'  : 'formButton'}
-							type='button'
-							id='discount'
-							value={true}
-							onClick={onMutate}
+						<label
+							className='block uppercase tracking-wide text-accent-content text-xs font-bold mb-2'
+							
 						>
-							Yes
-						</button>
-						<button
-							className={
-								!discount && discount !== null ? 'bg-neutral-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center' : 'formButton'
-							}
-							type='button'
-							id='discount'
-							value={false}
-							onClick={onMutate}
-						>
-							No
-						</button>
-					</div>
-
-					<label className='font-semibold mt-4 block'>Regular Price</label>
-					<div>
-						<input
-							className='bg-neutral-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mb-0 ml-0 flex justify-center items-center border-none outline-none mr-12 py-4 px-3'
-							type='number'
-							id='regularPrice'
-							value={regularPrice}
-							onChange={onMutate}
-							min='50'
-							max='750000000'
-							required
-						/>
-						{type === 'rent' && <p className='font-semibold rent'>$ / Month</p>}
-					</div>
-
-					{discount && (
-						<>
-							<label className='font-semibold mt-4 block'>Discounted Price</label>
+							Regular Price
+						</label>
+						<div>
 							<input
-								className='bg-neutral-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mb-0 ml-0 flex justify-center items-center border-none outline-none mr-12 py-4 px-3'
+								className='appearance-none block w-full bg-gray-200 text-base-300 border border-base-100 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
 								type='number'
-								id='discountedPrice'
-								value={discountedPrice}
+								id='regularPrice'
+								value={regularPrice}
 								onChange={onMutate}
 								min='50'
 								max='750000000'
-								required={discount}
+								required
 							/>
-						</>
-					)}
+							{type === 'rent' && (
+								<p className='lock uppercase tracking-wide text-accent-content text-xs font-bold mb-2'>$ /Month</p>
+							)}
+						</div>
 
-					<label className='font-semibold mt-4 block'>Images</label>
-					<p className='text-base opacity-70'>
-						The first image will be the cover (max 6).
-					</p>
-					<input
-						className='w-full file'
-						type='file'
-						id='images'
-						onChange={onMutate}
-						max='6'
-						accept='.jpg,.png,.jpeg'
-						multiple
-						required
-					/>
-					<button type='submit' className='cursor-pointer rounded-2xl py-3.5 px-8 font-semibold text-xl my-0 mx-auto flex items-center justify-center bg-accent' >
-						Create Listing
-					</button>
+						{offer && (
+							<>
+								<label
+									className='lock uppercase tracking-wide text-accent-content text-xs font-bold mb-2'
+								
+								>
+									Discount Price
+								</label>
+								<input
+									className='appearance-none block w-full bg-gray-200 text-base-300 border border-base-100 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
+									type='number'
+									id='discountedPrice'
+									value={discountedPrice}
+									onChange={onMutate}
+									min='50'
+									max='750000000'
+									required={offer}
+								/>
+							</>
+						)}
+           </div>
+
+							<div className='flex flex-col mb-4'>
+						<label
+							className='lock uppercase tracking-wide text-accent-content text-xs font-bold mb-2'
+							
+						>
+							Images
+						</label>
+
+						<p className='text-accent-content text-xs font-bold mb-2 opacity-40'
+						>
+							The first image will be the cover (max 6).
+						</p>
+						<input
+							className='appearance-none block w-full bg-gray-200 text-base-300 border border-base-100 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
+							type='file'
+							id='images'
+							onChange={onMutate}
+							max='6'
+							accept='.jpg,.png,.jpeg'
+							multiple
+							required
+						/>
+						</div>
+
+						<button
+							type='submit'
+							className='cursor-pointer rounded-2xl py-3.5 px-8 font-semibold text-xl my-0 mx-auto flex items-center justify-center bg-gradient-to-r from-accent-focus to-secondary-content text-accent mb-12 '
+						>
+							Create Listing
+						</button>
+
+
+
+					</div>
 				</form>
-			</main>
+			</div>
 		</div>
 	)
 }
