@@ -26,7 +26,7 @@ const EditListing = () => {
 		parking: false,
 		furnished: false,
 		address: '',
-		discount: false,
+		offer: false,
 		regularPrice: 0,
 		discountedPrice: 0,
 		images: {},
@@ -42,7 +42,7 @@ const EditListing = () => {
 		parking,
 		furnished,
 		address,
-		discount,
+		offer,
 		regularPrice,
 		discountedPrice,
 		images,
@@ -203,7 +203,7 @@ const EditListing = () => {
 		formDataCopy.location = address
 		delete formDataCopy.images
 		delete formDataCopy.address
-		!formDataCopy.discount && delete formDataCopy.discountedPrice
+		!formDataCopy.offer && delete formDataCopy.discountedPrice
 
 		const docRef = doc(db, 'listings', params.listingId)
 		await updateDoc(docRef, formDataCopy)
@@ -243,16 +243,24 @@ const EditListing = () => {
 	
 		return (
 			<div className='mb-40'>
-				<header>
-					<p className='text-3xl font-extrabold'>Edit Listing</p>
-				</header>
-				<main>
-					<form onSubmit={onSubmit}>
-						<label className='font-semibold mt-6 block'>Sale/Rent</label>
-						<div className='flex'>
+			<header>
+				<p className='text-3xl font-extrabold mt-[15px] ml-8'>
+					Edit Listing
+				</p>
+			</header>
+				
+			  <div className='flex flex-col justify-center'>
+					<form onSubmit={onSubmit} className='w-full max-w-xl my-8'>
+
+					<div className='flex flex-wrap mx-3 mb-6'>
+						<div className='w-full md:w-1/2 px-3 mb-6 md:mb-0'>
+
+						<label className='block uppercase tracking-wide text-accent-content text-xs font-bold mb-2'>Sale/Rent</label>
+						<div className='flex mb-8'>
 							<button
 								type='button'
-								className={type === 'sale' ? 'bg-neutral-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center' : 'formButton'}
+								className={type === 'sale' ? 'bg-gradient-to-r from-accent-focus to-secondary-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center'
+								: 'bg-gradient-to-r from-base to-accent-focus text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center'}
 								id='type'
 								value='sale'
 								onClick={onMutate}
@@ -261,7 +269,8 @@ const EditListing = () => {
 							</button>
 							<button
 								type='button'
-								className={type === 'rent' ? 'bg-neutral-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center' : 'formButton'}
+								className={type === 'rent' ? 'bg-gradient-to-r from-accent-focus to-secondary-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center'
+								: 'bg-gradient-to-r from-base-300 to-accent-focus text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center'}
 								id='type'
 								value='rent'
 								onClick={onMutate}
@@ -270,9 +279,9 @@ const EditListing = () => {
 							</button>
 						</div>
 	
-						<label className='font-semibold mt-4 block'>Name</label>
+						<label 	className='block uppercase tracking-wide text-accent-content text-xs font-bold mb-2'>Name</label>
 						<input
-							className='bg-neutral-content text-accent py-3.5 px-3 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center border-none outline-none w-4/12 max-w-xs'
+								className='appearance-none block w-full bg-gray-200 text-base-300 border border-base-100 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
 							type='text'
 							id='name'
 							value={name}
@@ -282,11 +291,11 @@ const EditListing = () => {
 							required
 						/>
 	
-						<div className='flex '>
-							<div>
-								<label className='font-semibold mt-4 block'>Bedrooms</label>
+				
+							
+								<label className='block uppercase tracking-wide text-accent-content text-xs font-bold mb-2'>Bedrooms</label>
 								<input
-									className='bg-neutral-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mb-0 ml-0 flex justify-center items-center border-none outline-none mr-12 py-4 px-3'
+									className='appearance-none block w-7 bg-gray-200 text-base-300 border border-base-100 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
 									type='number'
 									id='bedrooms'
 									value={bedrooms}
@@ -295,11 +304,11 @@ const EditListing = () => {
 									max='50'
 									required
 								/>
-							</div>
-							<div>
-								<label  className='font-semibold mt-4 block'>Bathrooms</label>
+							
+					
+								<label className='block uppercase tracking-wide text-accent-content text-xs font-bold mb-2'>Bathrooms</label>
 								<input
-									className='bg-neutral-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mb-0 ml-0 flex justify-center items-center border-none outline-none mr-12 py-4 px-3'
+							className='appearance-none block w-7 bg-gray-200 text-base-300 border border-base-100 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
 									type='number'
 									id='bathrooms'
 									value={bathrooms}
@@ -308,13 +317,13 @@ const EditListing = () => {
 									max='50'
 									required
 								/>
-							</div>
-						</div>
-	
-						<label className='font-semibold mt-4 block'>Parking spot</label>
-						<div className='flex'>
+					
+					
+						<label 	className='block uppercase tracking-wide text-accent-content text-xs font-bold mb-2'>Parking spot</label>
+						<div className="flex">
 							<button
-								className={parking ? 'bg-neutral-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center': 'formButton'}
+								className={parking ? 'bg-gradient-to-r from-accent-focus to-secondary-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center'
+								: 'bg-gradient-to-r from-base to-accent-focus text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center'}
 								type='button'
 								id='parking'
 								value={true}
@@ -326,7 +335,8 @@ const EditListing = () => {
 							</button>
 							<button
 								className={
-									!parking && parking !== null ? 'bg-neutral-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center' : 'formButton'
+									!parking && parking !== null ?'bg-gradient-to-r from-accent-focus to-secondary-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center'
+									: 'bg-gradient-to-r from-base to-accent-focus text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center'
 								}
 								type='button'
 								id='parking'
@@ -335,12 +345,14 @@ const EditListing = () => {
 							>
 								No
 							</button>
-						</div>
+							</div>
+					
 	
-						<label className='font-semibold mt-4 block'>Furnished</label>
+						<label 		className='block uppercase tracking-wide text-accent-content text-xs font-bold mb-2 mt-4'>Furnished</label>
 						<div className='flex'>
 							<button
-								className={furnished ? 'bg-neutral-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center' : 'formButton'}
+								className={furnished ? 'bg-gradient-to-r from-accent-focus to-secondary-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center'
+								: 'bg-gradient-to-r from-base to-accent-focus text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center'}
 								type='button'
 								id='furnished'
 								value={true}
@@ -351,8 +363,8 @@ const EditListing = () => {
 							<button
 								className={
 									!furnished && furnished !== null
-										? 'bg-neutral-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center'
-										: 'formButton'
+										? 'bg-gradient-to-r from-accent-focus to-secondary-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center'
+										: 'bg-gradient-to-r from-base to-accent-focus text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center'
 								}
 								type='button'
 								id='furnished'
@@ -363,9 +375,9 @@ const EditListing = () => {
 							</button>
 						</div>
 	
-						<label className='font-semibold mt-4 block'>Address</label>
+						<label 	className='block uppercase tracking-wide text-accent-content text-xs font-bold mb-2 mt-4'>Address</label>
 						<textarea
-							className='bg-neutral-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center border-none outline-none w-4/12 py-3.5 px-3.5'
+							className='bg-white text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center border border-base-100 outline-none w-full py-3.5 px-3.5'
 							type='text'
 							id='address'
 							value={address}
@@ -376,9 +388,9 @@ const EditListing = () => {
 						{!geolocationEnabled && (
 							<div className='flex'>
 								<div>
-									<label className='font-semibold mt-4 block'>Latitude</label>
+									<label className='block uppercase tracking-wide text-accent-content text-xs font-bold mb-2'>Latitude</label>
 									<input
-										className='bg-neutral-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mb-0 ml-0 flex justify-center items-center border-none outline-none mr-12 py-4 px-3'
+									className='appearance-none block w-full bg-gray-200 text-accent-content border border-base-100 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
 										type='number'
 										id='latitude'
 										value={latitude}
@@ -387,9 +399,9 @@ const EditListing = () => {
 									/>
 								</div>
 								<div>
-									<label className='font-semibold mt-4 block'>Longitude</label>
+									<label	className='block uppercase tracking-wide text-accent-content text-xs font-bold mb-2'>Longitude</label>
 									<input
-										className='bg-neutral-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mb-0 ml-0 flex justify-center items-center border-none outline-none mr-12 py-4 px-3'
+										className='appearance-none block w-full bg-gray-200 text-accent-content border border-base-100 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
 										type='number'
 										id='longitude'
 										value={longitude}
@@ -400,12 +412,19 @@ const EditListing = () => {
 							</div>
 						)} 
 	
-						<label className='font-semibold mt-4 block'>Discount</label>
+						
+						<label
+							className='block uppercase tracking-wide text-accent-content text-xs font-bold mb-2 mt-4'
+				
+						>
+							Discount
+						</label>
 						<div className='flex'>
 							<button
-								className={discount ? 'bg-neutral-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center'  : 'formButton'}
+								className={offer ? 'bg-gradient-to-r from-accent-focus to-secondary-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center'
+								: 'bg-gradient-to-r from-base to-accent-focus text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center'}
 								type='button'
-								id='discount'
+								id='offer'
 								value={true}
 								onClick={onMutate}
 							>
@@ -413,10 +432,11 @@ const EditListing = () => {
 							</button>
 							<button
 								className={
-									!discount && discount !== null ? 'bg-neutral-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center' : 'formButton'
+									!offer && offer !== null ? 'bg-gradient-to-r from-accent-focus to-secondary-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center'
+									: 'bg-gradient-to-r from-base to-accent-focus text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center'
 								}
 								type='button'
-								id='discount'
+								id='offer'
 								value={false}
 								onClick={onMutate}
 							>
@@ -424,10 +444,10 @@ const EditListing = () => {
 							</button>
 						</div>
 	
-						<label className='font-semibold mt-4 block'>Regular Price</label>
+						<label className='block uppercase tracking-wide text-accent-content text-xs font-bold mb-2'>Regular Price</label>
 						<div>
 							<input
-								className='bg-neutral-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mb-0 ml-0 flex justify-center items-center border-none outline-none mr-12 py-4 px-3'
+							className='appearance-none block w-full bg-gray-200 text-base-300 border border-base-100 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
 								type='number'
 								id='regularPrice'
 								value={regularPrice}
@@ -436,31 +456,31 @@ const EditListing = () => {
 								max='750000000'
 								required
 							/>
-							{type === 'rent' && <p className='font-semibold rent'>$ / Month</p>}
+							{type === 'rent' && <p className='lock uppercase tracking-wide text-accent-content text-xs font-bold mb-2'>$ / Month</p>}
 						</div>
 	
-						{discount && (
+						{offer && (
 							<>
-								<label className='font-semibold mt-4 block'>Discounted Price</label>
+								<label 	className='lock uppercase tracking-wide text-accent-content text-xs font-bold mb-2'>Discounted Price</label>
 								<input
-									className='bg-neutral-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mb-0 ml-0 flex justify-center items-center border-none outline-none mr-12 py-4 px-3'
+										className='appearance-none block w-full bg-gray-200 text-base-300 border border-base-100 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
 									type='number'
 									id='discountedPrice'
 									value={discountedPrice}
 									onChange={onMutate}
 									min='50'
 									max='750000000'
-									required={discount}
+									required={offer}
 								/>
 							</>
 						)}
-	
-						<label className='font-semibold mt-4 block'>Images</label>
-						<p className='text-base opacity-70'>
+	   	<div className='flex flex-col mb-4'>
+						<label 	className='lock uppercase tracking-wide text-accent-content text-xs font-bold mb-2'>Images</label>
+						<p className='text-accent-content text-xs font-bold mb-2 opacity-40'>
 							The first image will be the cover (max 6).
 						</p>
 						<input
-							className='w-full file'
+							className='appearance-none block w-full bg-gray-200 text-base-300 border border-base-100 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
 							type='file'
 							id='images'
 							onChange={onMutate}
@@ -469,11 +489,14 @@ const EditListing = () => {
 							multiple
 							required
 						/>
-						<button type='submit' className='cursor-pointer rounded-2xl py-3.5 px-8 font-semibold text-xl my-0 mx-auto flex items-center justify-center bg-accent' >
+						</div>
+						<button type='submit' className='cursor-pointer rounded-2xl py-3.5 px-8 font-semibold text-xl my-0 mx-auto flex items-center justify-center bg-gradient-to-r from-accent-focus to-secondary-content text-accent mb-12 ' >
 							Update Listing
 						</button>
+						</div>
+						</div>
 					</form>
-				</main>
+				</div>
 			</div>
 		)
 }

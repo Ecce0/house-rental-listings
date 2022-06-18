@@ -389,7 +389,7 @@ const CreateListing = () => {
 							</div>
 
 							{!geolocationEnabled && (
-								<div>
+								<div className='flex'>
 									<label
 										className='block uppercase tracking-wide text-accent-content text-xs font-bold mb-2'
 										
