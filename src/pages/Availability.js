@@ -5,9 +5,13 @@ import sellCategoryImage from '../assets/jpg/sellCategoryImage.jpg'
 import Carousel from '../components/Carousel'
 import monochrome from '../assets/monochrome.svg'
 
+
 const Availability = () => {
+
+	
+
 	return (
-		<div>
+		<div className='sm:flex flex-col'>
 			<div className='bg-transparent text-base w-full h-12 overflow-hidden flex flex-end justify-end'>
 				<ul className='flex flex-row'>
 					<li className='mr-6 mt-2 pointer-cursor'>
@@ -19,7 +23,7 @@ const Availability = () => {
 				</ul>
 			</div>
 			<header>
-				<img src={monochrome} alt='logo' className='flex p-16 mr-20' />
+				<img src={monochrome} alt='logo' className='w-auto h-auto max-w-full ml-12 sm:p-16 mr-20' />
 			</header>
 			<main>
 				<Carousel />
@@ -28,8 +32,8 @@ const Availability = () => {
 						Categories
 					</p>
 				</div>
-				<div className='flex justify-around mb-16'>
-					<div className='mt-2 mb-10 rounded-3xl p-1 border-double border-4 border-sky-500'>
+				<div className='flex flex-col md:flex md:flex-row justify-around mb-16'>
+					<div className='md:mt-2 mb-10 rounded-3xl p-1 border-double border-4 border-sky-500'>
 						<Link to='/type/rent' className='flex justify-between'>
 							<div className='bg-primary rounded-2xl '>
 								<div className='max-w-sm  rounded-2xl overflow-hidden shadow-lg'>

@@ -518,6 +518,7 @@ const EditListing = () => {
 							<button
 								type='submit'
 								className='cursor-pointer rounded-2xl py-3.5 px-8 font-semibold text-xl my-0 mx-auto flex items-center justify-center bg-gradient-to-r from-accent-focus to-secondary-content text-accent mb-12 '
+								onClick={onSubmit}
 							>
 								Update Listing
 							</button>

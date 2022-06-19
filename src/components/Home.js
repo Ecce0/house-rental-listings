@@ -6,11 +6,11 @@ const Home = () => {
 	const navigate = useNavigate()
 
 	return (
-		<div className='w-full h-full '>
+		<div className='w-full h-full'>
 			<img
 				src={cover}
 				alt='homepage'
-				className='content-center hover:cursor-pointer h-full absolute mr-16'
+				className='content-center hover:cursor-pointer h-full absolute'
 				onClick={() => navigate('/availability')}
 			/>
 		</div>

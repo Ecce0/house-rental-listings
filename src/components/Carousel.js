@@ -48,8 +48,8 @@ const Carousel = () => {
 	return (
 		listings && (
 			<>
-				<div className='flex justify-center'>
-					<p className='font-light mb-2 text-3xl text-secondary-content'>
+				<div className='flex flex-col sm:flex justify-center'>
+					<p className='flex text-sm text-center sm:text-left font-light mb-2 text-3xl text-secondary-content'>
 						Recommended Properties
 					</p>
 				</div>
