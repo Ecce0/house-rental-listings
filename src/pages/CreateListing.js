@@ -215,10 +215,7 @@ const CreateListing = () => {
 				<form onSubmit={onSubmit} className='w-full max-w-xl my-8'>
 					<div className='flex flex-wrap mx-3 mb-6'>
 						<div className='w-full md:w-1/2 px-3 mb-6 md:mb-0'>
-							<label
-								className='block uppercase tracking-wide text-accent-content text-xs font-bold mb-2'
-								
-							>
+							<label className='block uppercase tracking-wide text-accent-content text-xs font-bold mb-2'>
 								Sale/Rent
 							</label>
 							<div className='flex mb-8'>
@@ -249,10 +246,7 @@ const CreateListing = () => {
 									Rent
 								</button>
 							</div>
-							<label
-								className='block uppercase tracking-wide text-accent-content text-xs font-bold mb-2'
-							
-							>
+							<label className='block uppercase tracking-wide text-accent-content text-xs font-bold mb-2'>
 								Name
 							</label>
 
@@ -267,10 +261,7 @@ const CreateListing = () => {
 								required
 							/>
 
-							<label
-								className='block uppercase tracking-wide text-accent-content text-xs font-bold mb-2'
-							
-							>
+							<label className='block uppercase tracking-wide text-accent-content text-xs font-bold mb-2'>
 								Bedrooms
 							</label>
 							<input
@@ -283,10 +274,7 @@ const CreateListing = () => {
 								max='50'
 								required
 							/>
-							<label
-								className='block uppercase tracking-wide text-accent-content text-xs font-bold mb-2'
-							
-							>
+							<label className='block uppercase tracking-wide text-accent-content text-xs font-bold mb-2'>
 								Bathrooms
 							</label>
 							<input
@@ -300,10 +288,7 @@ const CreateListing = () => {
 								required
 							/>
 
-							<label
-								className='block uppercase tracking-wide text-accent-content text-xs font-bold mb-2'
-								
-							>
+							<label className='block uppercase tracking-wide text-accent-content text-xs font-bold mb-2'>
 								Parking Spot and/or Space
 							</label>
 							<div className='flex mb-4'>
@@ -336,10 +321,7 @@ const CreateListing = () => {
 									No
 								</button>
 							</div>
-							<label
-								className='block uppercase tracking-wide text-accent-content text-xs font-bold mb-2'
-								
-							>
+							<label className='block uppercase tracking-wide text-accent-content text-xs font-bold mb-2'>
 								Furnished?
 							</label>
 
@@ -372,28 +354,22 @@ const CreateListing = () => {
 								</button>
 							</div>
 							<div className='flex flex-col mb-4'>
-							<label
-								className='block uppercase tracking-wide text-accent-content text-xs font-bold mb-2'
-					
-							>
-								Address
-							</label>
-							<textarea
-								className='bg-white text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center border border-base-100 outline-none w-full py-3.5 px-3.5'
-								type='text'
-								id='address'
-								value={address}
-								onChange={onMutate}
-								required
-							/>
+								<label className='block uppercase tracking-wide text-accent-content text-xs font-bold mb-2'>
+									Address
+								</label>
+								<textarea
+									className='bg-white text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center border border-base-100 outline-none w-full py-3.5 px-3.5'
+									type='text'
+									id='address'
+									value={address}
+									onChange={onMutate}
+									required
+								/>
 							</div>
 
 							{!geolocationEnabled && (
 								<div className='flex'>
-									<label
-										className='block uppercase tracking-wide text-accent-content text-xs font-bold mb-2'
-										
-									>
+									<label className='block uppercase tracking-wide text-accent-content text-xs font-bold mb-2'>
 										Latitude
 									</label>
 									<input
@@ -404,10 +380,7 @@ const CreateListing = () => {
 										onChange={onMutate}
 										required
 									/>
-									<label
-										className='block uppercase tracking-wide text-accent-content text-xs font-bold mb-2'
-									
-									>
+									<label className='block uppercase tracking-wide text-accent-content text-xs font-bold mb-2'>
 										Longitude
 									</label>
 									<input
@@ -422,108 +395,96 @@ const CreateListing = () => {
 							)}
 						</div>
 						<div className='flex flex-col mb-4'>
-						<label
-							className='block uppercase tracking-wide text-accent-content text-xs font-bold mb-2'
-				
-						>
-							Discount
-						</label>
-						<div className='flex'>
-							<button
-								className={
-									offer
-										? 'bg-gradient-to-r from-accent-focus to-secondary-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center'
-										: 'bg-gradient-to-r from-base to-accent-focus text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center'
-								}
-								type='button'
-								id='offer'
-								value={true}
-								onClick={onMutate}
-							>
-								Yes
-							</button>
-							<button
-								className={
-									!offer && offer !== null
-										? 'bg-gradient-to-r from-accent-focus to-secondary-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center'
-										: 'bg-gradient-to-r from-base to-accent-focus text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center'
-								}
-								type='button'
-								id='offer'
-								value={false}
-								onClick={onMutate}
-							>
-								No
-							</button>
-						</div>
-						
-
-						<label
-							className='block uppercase tracking-wide text-accent-content text-xs font-bold mb-2'
-							
-						>
-							Regular Price
-						</label>
-						<div>
-							<input
-								className='appearance-none block w-full bg-gray-200 text-base-300 border border-base-100 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
-								type='number'
-								id='regularPrice'
-								value={regularPrice}
-								onChange={onMutate}
-								min='50'
-								max='750000000'
-								required
-							/>
-							{type === 'rent' && (
-								<p className='lock uppercase tracking-wide text-accent-content text-xs font-bold mb-2'>$ /Month</p>
-							)}
-						</div>
-
-						{offer && (
-							<>
-								<label
-									className='lock uppercase tracking-wide text-accent-content text-xs font-bold mb-2'
-								
+							<label className='block uppercase tracking-wide text-accent-content text-xs font-bold mb-2'>
+								Discount
+							</label>
+							<div className='flex'>
+								<button
+									className={
+										offer
+											? 'bg-gradient-to-r from-accent-focus to-secondary-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center'
+											: 'bg-gradient-to-r from-base to-accent-focus text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center'
+									}
+									type='button'
+									id='offer'
+									value={true}
+									onClick={onMutate}
 								>
-									Discount Price
-								</label>
+									Yes
+								</button>
+								<button
+									className={
+										!offer && offer !== null
+											? 'bg-gradient-to-r from-accent-focus to-secondary-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center'
+											: 'bg-gradient-to-r from-base to-accent-focus text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center'
+									}
+									type='button'
+									id='offer'
+									value={false}
+									onClick={onMutate}
+								>
+									No
+								</button>
+							</div>
+
+							<label className='block uppercase tracking-wide text-accent-content text-xs font-bold mb-2'>
+								Regular Price
+							</label>
+							<div>
 								<input
 									className='appearance-none block w-full bg-gray-200 text-base-300 border border-base-100 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
 									type='number'
-									id='discountedPrice'
-									value={discountedPrice}
+									id='regularPrice'
+									value={regularPrice}
 									onChange={onMutate}
 									min='50'
 									max='750000000'
-									required={offer}
+									required
 								/>
-							</>
-						)}
-           </div>
+								{type === 'rent' && (
+									<p className='lock uppercase tracking-wide text-accent-content text-xs font-bold mb-2'>
+										$ /Month
+									</p>
+								)}
+							</div>
 
-							<div className='flex flex-col mb-4'>
-						<label
-							className='lock uppercase tracking-wide text-accent-content text-xs font-bold mb-2'
-							
-						>
-							Images
-						</label>
+							{offer && (
+								<>
+									<label className='lock uppercase tracking-wide text-accent-content text-xs font-bold mb-2'>
+										Discount Price
+									</label>
+									<input
+										className='appearance-none block w-full bg-gray-200 text-base-300 border border-base-100 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
+										type='number'
+										id='discountedPrice'
+										value={discountedPrice}
+										onChange={onMutate}
+										min='50'
+										max='750000000'
+										required={offer}
+									/>
+								</>
+							)}
+						</div>
 
-						<p className='text-accent-content text-xs font-bold mb-2 opacity-40'
-						>
-							The first image will be the cover (max 6).
-						</p>
-						<input
-							className='appearance-none block w-full bg-gray-200 text-base-300 border border-base-100 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
-							type='file'
-							id='images'
-							onChange={onMutate}
-							max='6'
-							accept='.jpg,.png,.jpeg'
-							multiple
-							required
-						/>
+						<div className='flex flex-col mb-4'>
+							<label className='lock uppercase tracking-wide text-accent-content text-xs font-bold mb-2'>
+								Images
+							</label>
+
+							<p className='text-accent-content text-xs font-bold mb-2 opacity-40'>
+								The first image will be the cover (max 6).
+							</p>
+							<input
+								className='appearance-none block w-full bg-gray-200 text-base-300 border border-base-100 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
+								type='file'
+								id='images'
+								onChange={onMutate}
+								max='6'
+								accept='.jpg,.png,.jpeg'
+								multiple
+								required
+							/>
 						</div>
 
 						<button
@@ -532,9 +493,6 @@ const CreateListing = () => {
 						>
 							Create Listing
 						</button>
-
-
-
 					</div>
 				</form>
 			</div>

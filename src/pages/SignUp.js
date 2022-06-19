@@ -104,7 +104,6 @@ const SignUp = () => {
 							/>
 						</div>
 					</div>
-					
 
 					<div className='md:flex md:items-center mb-6'>
 						<div className='md:w-1/3'>
@@ -157,8 +156,6 @@ const SignUp = () => {
 						</div>
 					</div>
 				</form>
-
-			
 
 				<OAuth />
 				<Link

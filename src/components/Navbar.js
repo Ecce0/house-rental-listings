@@ -34,7 +34,9 @@ const Navbar = () => {
 								/>
 								<p
 									className={
-										pathMatchRoute('/availability') ? 'text-accent-focus' : 'text-base-content'
+										pathMatchRoute('/availability')
+											? 'text-accent-focus'
+											: 'text-base-content'
 									}
 								>
 									Availability
@@ -48,7 +50,13 @@ const Navbar = () => {
 									size={60}
 									color={pathMatchRoute('/deals') ? '#3d2636' : '#d7a64c'}
 								/>
-								<p className={pathMatchRoute('/deals') ? 'text-accent-focus' : 'text-base-content'}>
+								<p
+									className={
+										pathMatchRoute('/deals')
+											? 'text-accent-focus'
+											: 'text-base-content'
+									}
+								>
 									Deals
 								</p>
 							</li>
@@ -64,7 +72,9 @@ const Navbar = () => {
 								/>
 								<p
 									className={
-										pathMatchRoute('/user-profile') ? 'text-accent-focus' : 'text-base-content'
+										pathMatchRoute('/user-profile')
+											? 'text-accent-focus'
+											: 'text-base-content'
 									}
 								>
 									Profile

@@ -62,7 +62,7 @@ const Availability = () => {
 							</div>
 						</Link>
 					</div>
-					
+
 					<div className='mt-2 mb-10 rounded-3xl p-1 border-double border-4 border-sky-500'>
 						<Link to='/type/sale' className='flex justify-between'>
 							<div className='bg-primary rounded-2xl'>

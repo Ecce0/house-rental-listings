@@ -127,7 +127,9 @@ const UserProfile = () => {
 						<input
 							type='text'
 							id='name'
-							className={!changeDetails ? 'userName' : 'userName bg-accent-content'}
+							className={
+								!changeDetails ? 'userName' : 'userName bg-accent-content'
+							}
 							disabled={!changeDetails}
 							value={name}
 							onChange={onChange}
@@ -135,7 +137,9 @@ const UserProfile = () => {
 						<input
 							type='text'
 							id='email'
-							className={!changeDetails ? 'userName' : 'userName bg-accent-content'}
+							className={
+								!changeDetails ? 'userName' : 'userName bg-accent-content'
+							}
 							disabled={!changeDetails}
 							value={email}
 							onChange={onChange}

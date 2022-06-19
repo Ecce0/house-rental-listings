@@ -41,51 +41,51 @@ const Carousel = () => {
 		return <Spinner />
 	}
 
-	if(listings.length === 0) {
+	if (listings.length === 0) {
 		return <></>
-	} 
+	}
 
 	return (
 		listings && (
 			<>
 				<div className='flex justify-center'>
-				<p className='font-light mb-2 text-3xl text-secondary-content'>Recommended Properties</p>
+					<p className='font-light mb-2 text-3xl text-secondary-content'>
+						Recommended Properties
+					</p>
 				</div>
 				<div className='bg-base-content m-2 rounded-xl p-1 bg-gradient-to-r from-[#a9ccff] via-[#0f1f35] to-[#a9ccff]'>
-				<Swiper
-					modules={[Navigation, Pagination, Scrollbar, A11y]}
-					slidesPerView={1}
-					pagination={{ clickable: true }}
-					navigation
-				>
-					{listings.map(({ data, id }) => {
-						return (
-							
-							<SwiperSlide
-								key={id}
-								onClick={() => navigate(`/type/${data.type}/${id}`)}
-							>
-								<div
-									style={{
-										background: `url(${data.imgUrls[0]}) center no-repeat`,
-										backgroundSize: 'cover'
-									}}
-									className='rounded-xl h-screen w-full'
+					<Swiper
+						modules={[Navigation, Pagination, Scrollbar, A11y]}
+						slidesPerView={1}
+						pagination={{ clickable: true }}
+						navigation
+					>
+						{listings.map(({ data, id }) => {
+							return (
+								<SwiperSlide
+									key={id}
+									onClick={() => navigate(`/type/${data.type}/${id}`)}
 								>
-									<p className='md:text-3xl absolute top-14 left-0 font-semibold max-w-7xl text-xl bg-accent text-accent-content rounded-2xl opacity-75 pl-2 pr-2 ml-2'>{data.name}</p>
-									<p className='absolute top-16 left-0 max-w-7xl p-1 px-2 bg-accent text-accent-content rounded-2xl opacity-75 font-bold rounded-2xl p-1 ml-2'>
-										${data.discountedPrice ?? data.regularPrice}{' '}
-										{data.type === 'rent' && '/month'}
-									</p>
-								</div>
-								
-							</SwiperSlide>
-							
-						)
-					})}
-				</Swiper>
+									<div
+										style={{
+											background: `url(${data.imgUrls[0]}) center no-repeat`,
+											backgroundSize: 'cover',
+										}}
+										className='rounded-xl h-screen w-full'
+									>
+										<p className='md:text-3xl absolute top-14 left-0 font-semibold max-w-7xl text-xl bg-accent text-accent-content rounded-2xl opacity-75 pl-2 pr-2 ml-2'>
+											{data.name}
+										</p>
+										<p className='absolute top-16 left-0 max-w-7xl p-1 px-2 bg-accent text-accent-content rounded-2xl opacity-75 font-bold rounded-2xl p-1 ml-2'>
+											${data.discountedPrice ?? data.regularPrice}{' '}
+											{data.type === 'rent' && '/month'}
+										</p>
+									</div>
+								</SwiperSlide>
+							)
+						})}
+					</Swiper>
 				</div>
-				
 			</>
 		)
 	)

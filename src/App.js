@@ -16,20 +16,16 @@ import PasswordReminder from './pages/PasswordReminder'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
-
-//Fix mapcontainer first
 //Then go back check all functionality
 //Make it all responsive
 //fix navbar
-
-
 
 function App() {
 	return (
 		<div className='bg-gradient-to-r from-[#3d2636] font-serif flex flex-col flex-start'>
 			<Router>
 				<Routes>
-					<Route exact path='/' element={<Home />} />					
+					<Route exact path='/' element={<Home />} />
 					<Route path='/availability' element={<Availability />} />
 					<Route path='/deals' element={<Deals />} />
 					<Route path='/type/:typeName' element={<Type />} />
@@ -48,7 +44,6 @@ function App() {
 			</Router>
 			<ToastContainer />
 		</div>
-		
 	)
 }
 
