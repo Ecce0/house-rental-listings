@@ -43,7 +43,7 @@ const Listing = () => {
 	}
 
 	return (
-		<main>
+		<main className=''>
 			<h3 className='text-3xl font-extrabold py-2 px-2 mt-8 mb-4 sm:flex'>
 				{listing.name}
 			</h3>

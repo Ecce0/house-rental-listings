@@ -52,7 +52,7 @@ const Contact = () => {
 								id='message'
 								value={message}
 								onChange={onChange}
-								className='shadow-2xl border-none rounded-[3rem] h-[300px] w-1/2 outline-none py-4 px-6 text-base'
+								className='w-auto shadow-2xl border-none rounded-[3rem] h-[300px] md:w-1/2 outline-none py-4 px-6 text-base'
 							></textarea>
 
 							<a
