@@ -33,17 +33,17 @@ const Contact = () => {
 	return (
 		<div className='m-4'>
 			<header>
-				<p className='font-extrabold text-[2rem]'>Contact Landlord</p>
+				<p className='font-extrabold text-[2rem] '>Contact Landlord</p>
 			</header>
 			{landlord !== null && (
 				<main>
-					<div className='mt-8 flex items-center'>
-						<p className='font-semibold text-[1.2rem]'>
+					<div className='mt-8 flex items-center '>
+						<p className='font-semibold text-[1.2rem] text-accent-content'>
 							Contact {landlord?.name}
 						</p>
 					</div>
 					<form className='mt-2'>
-						<div className='mt-4 flex flex-col mb-8'>
+						<div className='mt-4 flex flex-col mb-8 text-accent-content'>
 							<label htmlFor='message' className='mb-2'>
 								Message
 							</label>
@@ -52,7 +52,7 @@ const Contact = () => {
 								id='message'
 								value={message}
 								onChange={onChange}
-								className='shadow-2xl border-none rounded-[3rem] h-[300px] w-full outline-none py-4 px-6 text-base'
+								className='shadow-2xl border-none rounded-[3rem] h-[300px] w-1/2 outline-none py-4 px-6 text-base'
 							></textarea>
 
 							<a
@@ -62,7 +62,7 @@ const Contact = () => {
 							>
 								<button
 									type='button'
-									className='cursor-pointer rounded-2xl py-3.5 px-8 font-semibold w-[80%] my-0 mx-auto flex items-center justify-center'
+									className='cursor-pointer rounded-2xl py-3.5 px-8 font-semibold text-xl my-0 mx-auto flex items-center justify-center bg-gradient-to-r from-accent-focus to-secondary-content text-accent mt-8 mb-2 '
 								>
 									Send Message
 								</button>
