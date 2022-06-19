@@ -204,7 +204,7 @@ const CreateListing = () => {
 	}
 
 	return (
-		<div className='mb-40'>
+		<div className='md:mb-40'>
 			<header>
 				<p className='text-3xl font-extrabold mt-[15px] ml-8'>
 					Create a Listing
@@ -224,7 +224,7 @@ const CreateListing = () => {
 									className={
 										type === 'sale'
 											? 'bg-gradient-to-r from-accent-focus to-secondary-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center'
-											: 'bg-gradient-to-r from-base to-accent-focus text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center'
+											: 'bg-gradient-to-r from-base to-accent-focus text-secondary-content py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center'
 									}
 									id='type'
 									value='sale'
@@ -237,7 +237,7 @@ const CreateListing = () => {
 									className={
 										type === 'rent'
 											? 'bg-gradient-to-r from-accent-focus to-secondary-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center'
-											: 'bg-gradient-to-r from-base-300 to-accent-focus text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center'
+											: 'bg-gradient-to-r from-base-300 to-accent-focus text-secondary-content py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center'
 									}
 									id='type'
 									value='rent'
@@ -251,7 +251,7 @@ const CreateListing = () => {
 							</label>
 
 							<input
-								className='appearance-none block w-full bg-gray-200 text-base-300 border border-base-100 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
+								className='appearance-none block md:w-full bg-gray-200 text-base-300 border border-base-100 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
 								type='text'
 								id='name'
 								value={name}
@@ -296,7 +296,7 @@ const CreateListing = () => {
 									className={
 										parking
 											? 'bg-gradient-to-r from-accent-focus to-secondary-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center'
-											: 'bg-gradient-to-r from-base to-accent-focus text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center'
+											: 'bg-gradient-to-r from-base to-accent-focus text-secondary-content py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center'
 									}
 									type='button'
 									id='parking'
@@ -311,7 +311,7 @@ const CreateListing = () => {
 									className={
 										!parking && parking !== null
 											? 'bg-gradient-to-r from-accent-focus to-secondary-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center'
-											: 'bg-gradient-to-r from-base to-accent-focus text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center'
+											: 'bg-gradient-to-r from-base to-accent-focus text-secondary-content py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center'
 									}
 									type='button'
 									id='parking'
@@ -329,8 +329,8 @@ const CreateListing = () => {
 								<button
 									className={
 										furnished
-											? 'bg-gradient-to-r from-accent-focus to-secondary-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center'
-											: 'bg-gradient-to-r from-base to-accent-focus text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center'
+											? 'bg-gradient-to-r from-accent-focus to-secondary-content text-secondary-content py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center'
+											: 'bg-gradient-to-r from-base to-accent-focus text-secondary-content py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center'
 									}
 									type='button'
 									id='furnished'
@@ -343,7 +343,7 @@ const CreateListing = () => {
 									className={
 										!furnished && furnished !== null
 											? 'bg-gradient-to-r from-accent-focus to-secondary-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center'
-											: 'bg-gradient-to-r from-base to-accent-focus text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center'
+											: 'bg-gradient-to-r from-base to-accent-focus text-secondary-content py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center'
 									}
 									type='button'
 									id='furnished'
@@ -358,7 +358,7 @@ const CreateListing = () => {
 									Address
 								</label>
 								<textarea
-									className='bg-white text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center border border-base-100 outline-none w-full py-3.5 px-3.5'
+									className='bg-white text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center border border-base-100 outline-none md:w-full py-3.5 px-3.5'
 									type='text'
 									id='address'
 									value={address}
@@ -403,7 +403,7 @@ const CreateListing = () => {
 									className={
 										offer
 											? 'bg-gradient-to-r from-accent-focus to-secondary-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center'
-											: 'bg-gradient-to-r from-base to-accent-focus text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center'
+											: 'bg-gradient-to-r from-base to-accent-focus text-secondary-content py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center'
 									}
 									type='button'
 									id='offer'
@@ -416,7 +416,7 @@ const CreateListing = () => {
 									className={
 										!offer && offer !== null
 											? 'bg-gradient-to-r from-accent-focus to-secondary-content text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center'
-											: 'bg-gradient-to-r from-base to-accent-focus text-accent py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center'
+											: 'bg-gradient-to-r from-base to-accent-focus text-secondary-content py-3.5 px-12 font-semibold rounded-2xl text-base mt-2 mr-2 mb-0 ml-0 flex justify-center items-center'
 									}
 									type='button'
 									id='offer'
@@ -476,7 +476,7 @@ const CreateListing = () => {
 								The first image will be the cover (max 6).
 							</p>
 							<input
-								className='appearance-none block w-full bg-gray-200 text-base-300 border border-base-100 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
+								className='w-auto appearance-none block md:w-full bg-gray-200 text-base-300 border border-base-100 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
 								type='file'
 								id='images'
 								onChange={onMutate}

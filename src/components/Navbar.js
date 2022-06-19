@@ -20,7 +20,7 @@ const Navbar = () => {
 		return (
 			<>
 				<footer className='fixed-bottom justify-center items-center'>
-					<nav className='m-auto sm:flex bg-base-100 p-3 justify-center h-16 place-self-end justify-end'>
+					<nav className='bg-base-100 p-3 justify-center h-16 place-self-end justify-end md:mt-[100px] md:flex '>
 						<ul className='flex flex-row text-neutral-content space-x-16 justify-evenly'>
 							<li
 								className='hover:animate-pulse flex flex-col items-center'

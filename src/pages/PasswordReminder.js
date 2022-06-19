@@ -24,9 +24,9 @@ const PasswordReminder = () => {
 	}
 
 	return (
-		<div className='m-4'>
+		<div className='mb-56 m:mb-[400px]'>
 			<header>
-				<p className='text-3xl font-extrabold mb-4'>Forgot Password</p>
+				<p className='text-3xl font-extrabold mb-4 mt-8 ml-4'>Forgot Password</p>
 			</header>
 
 			<form onSubmit={onSubmit} className='w-full max-w-xs'>

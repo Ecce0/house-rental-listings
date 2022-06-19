@@ -44,7 +44,7 @@ const SignIn = () => {
 
 	return (
 		<>
-			<div className='m-4'>
+			<div className='md:m-4'>
 				<header>
 					<p className='text-3xl font-extrabold mb-4'>Welcome!</p>
 				</header>
