@@ -98,7 +98,7 @@ const UserProfile = () => {
 	}
 
 	return (
-		<div className='mb-40 p-12'>
+		<div className='flex flex-col md:mb-40 md:p-12'>
 			<header className='flex justify-between items-center'>
 				<p className='text-3xl font-extrabold'>My Profile</p>
 				<button
@@ -157,9 +157,9 @@ const UserProfile = () => {
 				</Link>
 
 				{!loading && listings?.length > 0 && (
-					<div className='flex justify-start flex-col mr-[600px]'>
+					<div className='flex justify-start flex-col md:mr-[600px]'>
 						<p className='mt-4 font-semibold'>Your Listings</p>
-						<ul className='p-0 flex-col'>
+						<ul className='flex flex-col w-auto md:p-0 md:w-full'>
 							{listings.map((listing) => (
 								<ListItem
 									key={listing.id}

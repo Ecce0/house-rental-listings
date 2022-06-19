@@ -94,9 +94,9 @@ const Type = () => {
 	}
 
 	return (
-		<div className='m-12'>
+		<div className='m-4 md:m-12'>
 			<header>
-				<p className='font-medium mb-2 text-5xl text-center'>
+				<p className='flex text-sm text-center sm:text-left font-light mb-2 text-3xl text-secondary-content'>
 					{params.typeName === 'rent' ? 'Places for Rent' : 'Places for Sale'}
 				</p>
 			</header>
@@ -106,7 +106,7 @@ const Type = () => {
 			) : listings && listings.length > 0 ? (
 				<>
 					<main>
-						<ul className='p-0 flex flex-col justify-start mr-[610px]'>
+						<ul className='flex flex-col justify-center  md:p-0  md:mr-[610px]'>
 							{listings.map((listing) => (
 								<ListItem
 									listing={listing.data}
