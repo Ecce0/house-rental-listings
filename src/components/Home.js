@@ -10,7 +10,7 @@ const Home = () => {
 			<img
 				src={cover}
 				alt='homepage'
-				className='content-center hover:cursor-pointer h-full absolute'
+				className='flex items-center mt-48 w-auto h-auto md:mt-0 md:content-center hover:cursor-pointer md:h-full md:absolute'
 				onClick={() => navigate('/availability')}
 			/>
 		</div>

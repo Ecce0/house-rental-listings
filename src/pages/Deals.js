@@ -95,9 +95,9 @@ const Deals = () => {
 	}
 
 	return (
-		<div className='m-12'>
+		<div className='m-auto md:m-12'>
 			<header>
-				<p className='font-medium text-5xl text-center my-12'>
+				<p className='flex flex-col font-light md:font-medium text-5xl text-center my-12'>
 					Deals and Offers
 				</p>
 			</header>
@@ -107,7 +107,7 @@ const Deals = () => {
 			) : listings && listings.length > 0 ? (
 				<>
 					<main>
-						<ul className='p-0 flex flex-col mr-[610px]'>
+						<ul className='flex flex-col justify-center  md:p-0  md:mr-[610px]'>
 							{listings.map((listing) => (
 								<ListItem
 									listing={listing.data}
